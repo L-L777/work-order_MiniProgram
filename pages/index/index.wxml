@@ -1,27 +1,70 @@
 <!--index.wxml-->
-<scroll-view class="scrollarea" scroll-y type="list">
-  <view class="container">
-    <view class="userinfo">
-      <block wx:if="{{canIUseNicknameComp && !hasUserInfo}}">
-        <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
-          <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
-        </button>
-        <view class="nickname-wrapper">
-          <text class="nickname-label">昵称</text>
-          <input type="nickname" class="nickname-input" placeholder="请输入昵称" bind:change="onInputChange" />
-        </view>
-      </block>
-      <block wx:elif="{{!hasUserInfo}}">
-        <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-        <view wx:else> 请使用2.10.4及以上版本基础库 </view>
-      </block>
-      <block wx:else>
-        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      </block>
-    </view>
-    <view class="usermotto">
-      <text class="user-motto">{{motto}}</text>
-    </view>
-  </view>
-</scroll-view>
+<!-- 登录注册页面 -->
+<view class="bgc_box">
+  <van-image
+  width="100vw"
+  height="100%"
+  src="/assets/images/login(1).png"
+/>
+</view>
+<view class="change_box">
+  <button class="login_form_btn change_btn {{isLoginActive ? 'btn_active' : ''}}" bindtap="onLoginClick">登录</button>
+  <button class="register_form_btn change_btn {{!isLoginActive ? 'btn_active' : ''}}" bindtap="onRegisterClick">注册</button>
+</view>
+
+<view  class="form_box ">
+  <image src="../../assets/svg/logo.svg" class="logo_img"></image>
+<!-- 登录表单 -->
+  <form wx:if="{{isLoginActive}}" bindsubmit="onSubmit" class="form">
+  <van-field
+    name="phone"
+    label='手机号:'
+    placeholder="手机号"
+    custom-class="custom-input"
+    left-icon="phone-o"
+    required
+  />
+  <van-field
+    name="password"
+    label='密码:'
+    placeholder="密码"
+    type="password"
+    custom-class="custom-input"
+    left-icon="closed-eye"
+    required
+  />
+  <button formType="submit" class="submit-btn">登录</button>
+</form>
+<!-- 注册表单 -->
+<form   wx:else bindsubmit="onSubmit" class="form">
+  <van-field
+    name="phone"
+    label='手机号:'
+    placeholder="手机号"
+    custom-class="custom-input"
+    left-icon="phone-o"
+    required
+  />
+  <van-field
+    name="password"
+    label='密码:'
+    placeholder="密码"
+    type="password"
+    custom-class="custom-input"
+    left-icon="closed-eye"
+    required
+  />
+  <van-field
+      name="confirmPassword"
+      label='确认密码:'
+      placeholder="确认密码"
+      type="password"
+      custom-class="custom-input"
+      left-icon="closed-eye"
+      required
+    />
+  <button formType="submit" class="submit-btn">注册</button>
+</form>
+</view>
+
+
