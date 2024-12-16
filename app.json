@@ -1,6 +1,8 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/home/home",
+    "pages/person/person"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -10,6 +12,19 @@
   },
   "usingComponents": {
     "van-icon": "@vant/weapp/icon/index"
+  },
+  "tabBar": {
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "工单首页"
+      },
+      {
+        "pagePath": "pages/person/person",
+        "text": "个人中心"
+      }
+    ]
   },
   "componentFramework": "glass-easel",
   "sitemapLocation": "sitemap.json",
