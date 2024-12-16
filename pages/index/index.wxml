@@ -31,7 +31,6 @@
     type="password"
     custom-class="custom-input"
     left-icon="closed-eye"
-    
     required
   />
   <button formType="submit" class="submit-btn">登录</button>
