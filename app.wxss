@@ -8,3 +8,14 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+page{
+  background-color: #f9faff;
+}
+/*去掉button组件的边框*/
+button::after{ 
+  border-radius: 0;
+  border: none;
+ } 
+ button{
+  border-radius: 0;
+}

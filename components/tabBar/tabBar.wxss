@@ -1,0 +1,4 @@
+/* components/tabBar/tabBar.wxss */
+.custom-tabBar{
+  z-index: 5000 !important;
+}

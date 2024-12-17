@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-    "tabBar":"../../components/tabBar/tabBar",
     "navBar":"../../components/navBar/navBar",
     "van-search": "@vant/weapp/search/index",
     "ordersCard":"../../components/ordersCard/ordersCard"

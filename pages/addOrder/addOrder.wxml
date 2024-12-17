@@ -1,0 +1,23 @@
+<!--pages/addOrder/addOrder.wxml-->
+<navBar name="新建工单列表" leftStatus='true'></navBar>
+
+<view  style="position: fixed;top:{{navBarHeight}}rpx;  width: 100vw; height: 100rpx; background-color: white; z-index: 5000;">
+  <van-search
+value="{{ value }}"
+placeholder="请输入搜索关键词"
+show-action
+bind:search="onSearch"
+bind:cancel="onCancel"
+custom-class="search_class"
+/>
+</view>
+<view  style="padding-top:{{navBarHeight+100}}rpx;  position: relative; width: 100vw;">
+  <!-- 工单 -->
+<view class="orders_box {{role === 'EMPLOYEE' || role === 'ADMIN' ? 'worker ' : ''}}">
+  <block wx:for="{{orderList}}" wx:key="id">
+    <ordersCard order="{{item}}" btnshow='add'></ordersCard>
+  </block>
+  <ordersCard order="{{item}}" btnshow='add'></ordersCard>
+
+</view>
+</view>

@@ -4,7 +4,8 @@
   <van-image
   width="100vw"
   height="100%"
-  src="/assets/images/login(1).png"
+  lazy-load
+  src="https://web-test999.oss-cn-hangzhou.aliyuncs.com/login-background.png"
 />
 </view>
 <view class="change_box">
@@ -66,5 +67,25 @@
   <button formType="submit" class="submit-btn">注册</button>
 </form>
 </view>
+
+<!-- 动画效果 -->
+<view class="usermotto">
+    <!-- 环绕效果 -->
+    <view id="page">
+      <view id="container">
+        <view id="ring"></view>
+        <view id="ring"></view>
+        <view id="ring"></view>
+        <view id="ring"></view>
+      </view>
+    </view>
+    <!-- 南方电网字样 -->
+    <view class="loader">
+      <text class="text">
+        南方
+        电网
+      </text>
+    </view>
+  </view>
 
 

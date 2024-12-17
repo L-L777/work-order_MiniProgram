@@ -1,0 +1,60 @@
+/* components/ordersCard/ordersCard.wxss */
+.ordersCard{
+  /* background-color: #fff; */
+  background: linear-gradient(to bottom, #E8EEFF, #c3dbf2); /* 渐变色背景 */
+  width: 85vw;
+  height: 300rpx;
+  border-radius: 30px;
+  z-index: 100;
+  box-shadow: 0 5rpx 10rpx rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+  margin-top: 20rpx;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  box-sizing: border-box;
+  padding: 50rpx;
+  position: relative;
+}
+.order_content{
+  overflow: hidden; /* 隐藏溢出的内容 */
+  white-space: nowrap; /* 不允许内容换行 */
+  text-overflow: ellipsis; /* 用省略号表示溢出的内容 */
+  margin-bottom: 10rpx;
+  margin-left: 20rpx;
+}
+.detail_btn,.add_btn{
+  position: absolute;
+  bottom: 10%;
+  right: 5%;
+  font-size: 18rpx;
+  width: 100rpx;
+  height: 50rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20rpx;
+  background-color: #0033FF;
+  color: #fff;
+}
+.status_sign{
+  position: absolute;
+  top:0%;
+  right: 0%;
+  font-size: 20rpx;
+  color: #fff;
+  width: 150rpx;
+  height: 50rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-right-radius: 30px;
+}
+.unfinish{
+  background-color: #FF0099;
+}
+.appending{
+  background-color: #3366FF;
+}
+.finish{
+  background-color: #00CC33;
+}

@@ -17,4 +17,14 @@ register:(phone,password)=>{
   return $http.post('/user/register',data)
 },
 }
-module.exports={enterReq}
+// 工单处理模块请求
+const ordersReq={
+  // 获取工单列表(管理员/员工/施工方)
+  getOrders:(status,page,pageSize)=>{
+    const params={
+      status,page,pageSize
+    }
+    return $http.get('/orders',params)
+  },
+}
+module.exports={enterReq,ordersReq}

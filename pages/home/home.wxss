@@ -1,1 +1,73 @@
 /* pages/home/home.wxss */
+page{
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+/* 筛选按钮 */
+.select_box{
+  position: fixed;
+  width: 100vw;
+  height: 100rpx;
+  background-color: #3399FF;
+  display: flex;
+  z-index: 5000;
+}
+.select_btn{
+  width: 50%;
+  height: 100%;
+  font-size: 14px;
+  display: flex; 
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  background-color: transparent;
+  font-weight: 700;
+  color: #fff;
+  border:none;
+  transition: background-color 0.3s, color 0.3s;
+}
+.cur_select_btn{
+  background-color: #3333FF;
+}
+.all_order_btn{
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.my_order_btn{
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+/* 搜索框 */
+.search_class{
+  width: 100vw;
+}
+
+
+/* 工单盒子 */
+.orders_box{
+  margin-top: 10rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* 南网员工进入页面存储工单大盒子类名 */
+.worker{
+  width: 100vw;
+  margin-top: 210rpx;
+}
+/* 发布工单按钮 */
+.publish{
+  position: fixed;
+  right: 0%;
+  bottom:20%;
+  z-index: 300;
+  font-size: 14px;
+  width: 200rpx;
+  height: 80rpx;
+  border-radius: 10px;
+  background-color: #3399ff;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

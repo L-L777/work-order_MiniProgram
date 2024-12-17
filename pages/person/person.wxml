@@ -1,2 +1,15 @@
 <!--pages/person/person.wxml-->
-<text>pages/person/person.wxml</text>
+<navBar name="个人中心"></navBar>
+<view  class="person" style="padding-top:{{navBarHeight}}rpx; padding-bottom:{{tabBarHeight}}rpx; width: 100vw;">
+<view class="logo_box">
+  <image src="../../assets/svg/personpage_logo.svg" class="logo_img"></image>
+</view>
+  <view class="message_box">
+    <view>用户名（手机号）：{{phone}}</view>
+    <button class="person_btn update_password">修改密码</button>
+    <button class="person_btn login_out" bind:tap="loginout">退出登录</button>
+  </view>
+  
+</view>
+
+<tabBar active="1"></tabBar>

@@ -1,2 +1,38 @@
 <!--pages/home/home.wxml-->
-<text>pages/home/home.wxml</text>
+<navBar name="工单首页"></navBar>
+<view style="padding-top:{{navBarHeight}}rpx; padding-bottom:{{tabBarHeight}}rpx; position: relative; width: 100vw;"> 
+<!-- 筛选按钮 -->
+<view wx:if="{{role === 'EMPLOYEE' || role === 'ADMIN'}}" class="select_box">
+  <button class="select_btn all_order_btn {{allSelectActive ? 'cur_select_btn' : ''}}" bindtap="allSelectClick">全部工单</button>
+  <button class="select_btn my_order_btn {{!allSelectActive ? 'cur_select_btn' : ''}}" bindtap="mySelectClick">我的工单</button>
+</view>
+
+<!-- 搜索框 -->
+<view wx:if="{{role === 'EMPLOYEE' || role === 'ADMIN'}}" style="position: fixed;top:{{navBarHeight+90}}rpx;  width: 100vw; height: 100rpx; background-color: white; z-index: 5000;">
+  <van-search
+value="{{ value }}"
+placeholder="请输入搜索关键词"
+show-action
+bind:search="onSearch"
+bind:cancel="onCancel"
+custom-class="search_class"
+/>
+</view>
+
+<!-- 工单 -->
+<view class="orders_box {{role === 'EMPLOYEE' || role === 'ADMIN' ? 'worker ' : ''}}">
+  <block wx:for="{{orderList}}" wx:key="id">
+    <ordersCard order="{{item}}" btnshow='detail'></ordersCard>
+  </block>
+  <ordersCard order="{{item}}" btnshow='detail'> </ordersCard>
+  <ordersCard order="{{item}}" btnshow='detail'> </ordersCard>
+  <ordersCard order="{{item}}" btnshow='detail'> </ordersCard>
+  <ordersCard order="{{item}}" btnshow='detail'> </ordersCard>
+  <ordersCard order="{{item}}" btnshow='detail'> </ordersCard>
+
+</view>
+</view>
+
+<!-- 发布工单按钮 -->
+<button wx:if="{{role === 'EMPLOYEE' || role === 'ADMIN'}}" class="publish" bindtap="createBtn">发布工单</button>
+<tabBar active="0"></tabBar>

@@ -1,0 +1,13 @@
+<!--components/navBar/navBar.wxml-->
+<van-nav-bar
+  title="{{name}}"
+  custom-class="custom-navbar"
+  title-class='navtext'
+>
+  <!-- 自定义左侧插槽内容 -->
+  <view wx:if="{{leftStatus}}" slot='left' class="left-content" bind:tap="onBack">
+    <van-icon  name="arrow-left" size="14" color="#fff" />
+  <text class="nav-left-text">返回</text>
+  </view>
+  
+</van-nav-bar>

@@ -95,7 +95,6 @@ this.setData({
       }catch(error){
 
       }
-
     },
 
     // 提交登录表单
@@ -131,6 +130,7 @@ wx.setStorageSync('accessToken', res.data.accessToken);
 wx.setStorageSync('refreshToken', res.data.refreshToken);
 app.globalData.userId=res.data.userId
 app.globalData.role=res.data.role
+app.globalData.phone=phone
 // 跳转到首页
 wx.switchTab({ url: '/pages/home/home', });
         }

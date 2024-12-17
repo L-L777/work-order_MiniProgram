@@ -1,0 +1,5 @@
+<!--components/tabBar/tabBar.wxml-->
+<van-tabbar active="{{ active }}" bind:change="onChange" custom-class="custom-tabBar">
+  <van-tabbar-item icon="wap-home-o" >工单首页</van-tabbar-item>
+  <van-tabbar-item icon="user-o" >个人中心</van-tabbar-item>
+</van-tabbar>

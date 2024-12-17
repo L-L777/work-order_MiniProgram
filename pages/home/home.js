@@ -1,66 +1,44 @@
 // pages/home/home.js
+import { ordersReq } from "../../utils/api.js";
+const app = getApp();
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-
+    navBarHeight: app.globalData.navBarHeight,
+    tabBarHeight: app.globalData.tabBarHeight,
+    allSelectActive: true, // 筛选全部工单按钮
+    role: app.globalData.role,
+    userId: app.globalData.userId,
+    selectKey: '0', // 初始选择状态（全部或者我的）
+    orderList: [], // 工单列表
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad(options) {
-
+  allSelectClick() {
+    this.setData({ allSelectActive: true, selectKey: '0' });
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
+  mySelectClick() {
+    this.setData({ allSelectActive: false, selectKey: '1' });
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
+  onLoad() {
+    this.fetchOrders();
   },
+  // 获取数据
+  fetchOrders: async function() {
+    let key = this.data.role === 'EMPLOYEE' || this.data.role === 'ADMIN' ?this.data.selectKey : '';
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
+    const res = await ordersReq.getOrders(key);
+    if (res.code === 1) {
+      this.setData({ orderList: [...this.data.orderList, ...res.data] });
+    } else {
+      wx.showToast({
+        title: res.msg,
+        icon: 'none',
+      });
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
+  // 新建工单
+  createBtn:()=>{
+    wx.navigateTo({url:'/pages/addOrder/addOrder'})
   }
-})
+});
