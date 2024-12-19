@@ -12,9 +12,11 @@
 客户地址：
 <text>{{order.customerAddress}}</text>
 </view>
-<button wx:if="{{btnshow==='detail'}}" class="detail_btn">详情</button>
-<button wx:if="{{btnshow==='add'}}" class="add_btn">新建</button>
+<button wx:if="{{btnshow==='detail'}}" class="detail_btn" bindtap='toDetail'>详情</button>
+<button wx:if="{{btnshow==='add'}}" class="add_btn" bindtap='createOrders'>新建</button>
 <!-- <view class="status_sign unfinish">未确认</view> -->
 <view class="status_sign appending">施工中</view>
 <!-- <view class="status_sign finish">验收通过</view> -->
 </view>
+<!-- 底部弹窗 -->
+<pop createShow='{{show}}' bind:closeCreate="onClose"></pop>

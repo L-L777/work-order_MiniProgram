@@ -1,0 +1,41 @@
+<!--pages/sign/sign.wxml-->
+<navBar name="{{title}}" leftStatus='true'></navBar>
+<view class="sign_in_out_page" style="padding-top:{{navBarHeight}}rpx;  position: relative; width: 100vw;">
+<view class="sign_in_out_card">
+<view class="text_box">
+  <form  bindsubmit="signSubmit">
+  <van-cell-group>
+  <van-field
+    name="progress"
+    label="工程进度："
+    placeholder="请输入工程进度"
+    custom-class="custom-sign-input"
+    required
+  />
+  <van-field
+    name="description"
+    label="描述："
+    placeholder="请输入工程描述"
+    type="textarea"
+    autosize
+    custom-class="custom-sign-input"
+    required
+  />
+  <view class="uploader_box">
+    <van-uploader
+  deletable
+  multiple
+  file-list="{{fileList}}"
+  bind:delete="onDelete"
+  bind:after-read="onAfterRead"
+  catchtap="previewImage"
+/>
+
+  </view>
+  
+</van-cell-group>
+<button formType="submit" class="sign-submit-btn"> 提交</button>
+</form>
+</view>
+</view>
+</view>

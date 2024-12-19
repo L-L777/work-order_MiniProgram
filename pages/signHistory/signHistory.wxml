@@ -1,0 +1,50 @@
+<!--pages/signHistory/signHistory.wxml-->
+<navBar name="历史签到签退记录" leftStatus='true'></navBar>
+<view class="history_page" style="padding-top:{{navBarHeight}}rpx;  position: relative; width: 100vw;">
+<view class="history_card">
+<view class="signin_box">
+<view>签到</view>
+<view>时间：2024-12-31 20:00:00</view>
+<view>地点：广东工业大学</view>
+<button class="sign_detail" bind:tap="signHistory">详情</button>
+</view>
+<view class="signout_box">
+  <view>签退</view>
+<view>时间：2024-12-31 20:00:00</view>
+<view>地点：广东工业大学</view>
+<button class="sign_detail" bind:tap="signHistory">详情</button>
+</view>
+</view>
+<view class="history_card">
+<view class="signin_box">
+<view>签到</view>
+<view>时间：2024-12-31 20:00:00</view>
+<view>地点：广东工业大学</view>
+<button class="sign_detail" bind:tap="signHistory">详情</button>
+</view>
+<view class="signout_box">
+  <view>签退</view>
+<view>时间：2024-12-31 20:00:00</view>
+<view>地点：广东工业大学</view>
+<button class="sign_detail" bind:tap="signHistory">详情</button>
+</view>
+</view>
+<view class="history_card">
+<view class="signin_box">
+<view>签到</view>
+<view>时间：2024-12-31 20:00:00</view>
+<view>地点：广东工业大学</view>
+<button class="sign_detail" bind:tap="signHistory">详情</button>
+</view>
+<view class="signout_box">
+  <view>签退</view>
+<view>时间：2024-12-31 20:00:00</view>
+<view>地点：广东工业大学</view>
+<button class="sign_detail" bind:tap="signHistory">详情</button>
+</view>
+</view>
+
+
+</view>
+<!-- 历史签到签退信息弹出框 -->
+<pop signShow='{{signShow}}' bind:closeSign="onClose"></pop>

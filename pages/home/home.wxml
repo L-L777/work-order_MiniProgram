@@ -21,14 +21,14 @@ custom-class="search_class"
 
 <!-- 工单 -->
 <view class="orders_box {{role === 'EMPLOYEE' || role === 'ADMIN' ? 'worker ' : ''}}">
-  <block wx:for="{{orderList}}" wx:key="id">
+  <!-- <block wx:for="{{orderList}}" wx:key="id">
     <ordersCard order="{{item}}" btnshow='detail'></ordersCard>
-  </block>
-  <ordersCard order="{{item}}" btnshow='detail'> </ordersCard>
-  <ordersCard order="{{item}}" btnshow='detail'> </ordersCard>
-  <ordersCard order="{{item}}" btnshow='detail'> </ordersCard>
-  <ordersCard order="{{item}}" btnshow='detail'> </ordersCard>
-  <ordersCard order="{{item}}" btnshow='detail'> </ordersCard>
+  </block> -->
+  <ordersCard  btnshow='detail'> </ordersCard>
+  <ordersCard  btnshow='detail'> </ordersCard>
+  <ordersCard  btnshow='detail'> </ordersCard>
+  <ordersCard  btnshow='detail'> </ordersCard>
+  <ordersCard  btnshow='detail'> </ordersCard>
 
 </view>
 </view>

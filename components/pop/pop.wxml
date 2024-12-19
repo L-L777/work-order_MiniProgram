@@ -1,0 +1,157 @@
+<!--components/pop/pop.wxml-->
+<!-- 新建修改工单弹出框 -->
+<van-popup
+  show="{{ createShow }}"
+  round
+  closeable
+  position="bottom"
+  custom-style="height: 70%"
+  z-index='1000'
+  bind:close="onCreateClose"
+>
+<view class="add_message_box">
+<form  bindsubmit="messageSubmit">
+  <van-cell-group >
+  <van-field
+    
+    required
+    clearable
+    label="客户名称："
+    placeholder="请输入客户名称"
+    bind:click-icon="onClickIcon"
+  />
+
+  <van-field
+    
+    type="password"
+    label="客户电话："
+    placeholder="请输入客户电话"
+    required
+  />
+  <van-field
+    
+    required
+    clearable
+    label="南网员工名称："
+    placeholder="请输入南网员工名称"
+    bind:click-icon="onClickIcon"
+  />
+
+  <van-field
+    
+    type="password"
+    label="南网员工电话："
+    placeholder="请输入南网员工电话"
+    required
+  />
+  <van-field
+   
+    required
+    clearable
+    label="施工方名称："
+    placeholder="请输入施工方名称"
+    bind:click-icon="onClickIcon"
+  />
+
+  <van-field
+    
+    type="password"
+    label="施工方电话："
+    placeholder="请输入施工方电话"
+    required
+  />
+</van-cell-group>
+<button formType="submit" class="message-submit-btn">确认</button>
+</form>
+
+</view>
+</van-popup>
+
+<!-- 查看工单信息弹窗 -->
+<van-popup
+  show="{{ detailShow }}"
+  round
+  closeable
+  position="bottom"
+  custom-style="height: 70%"
+  z-index='1000'
+  bind:close="onDetailClose"
+>
+<view class="detail_box"> 
+<view class="detail_msg">业扩工单号：<text>12312312321</text></view>
+<view class="detail_msg">所属供电所：<text>南方电网湛江局</text></view>
+<view class="detail_msg">所属员工：<text>张三</text></view>
+<view class="detail_msg">所属员工手机号：<text>12312312321</text></view>
+<view class="detail_msg">客户名称：<text>李四</text></view>
+<view class="detail_msg">客户地址：<text>广东工业大学</text></view>
+<view class="detail_msg">客户编码：<text>00001111</text></view>
+<view class="detail_msg">施工方名称：<text>赵五</text></view>
+<view class="detail_msg">施工方手机号：<text>1397787722626</text></view>
+<view class="detail_msg">交单日期：<text>2024-12-20</text></view>
+<view class="detail_msg">接单日期：<text>2024-12-21</text></view>
+<view class="detail_msg">完成回单日期：<text>2024-12-30</text></view>
+<view class="detail_msg">验收时间：<text>2024-12-31</text></view>
+</view>
+</van-popup>
+
+<!-- 查看历史签到签退弹窗 -->
+<van-popup
+  show="{{ signShow }}"
+  round
+  closeable
+  position="bottom"
+  custom-style="height: 70%"
+  z-index='1000'
+  bind:close="onSignClose"
+>
+<view class="sign_box"> 
+  <view class="sign_msg">签到：</view>
+  <view class="sign_msg">时间：<text>2024-01-31 22:00:00</text></view>
+  <view class="sign_msg">地点：<text>南方电网湛江局</text></view>
+  <view class="sign_description">
+  <label>描述：</label><view class="description_content">南方电网湛江局</view>
+  </view>
+  <view class="sign_img_box">
+    <van-image
+  width="180rpx"
+  height="180rpx"
+  lazy-load
+  radius='5px'
+  custom-class="sign_img"
+  bind:click="previewImg"
+  data-src="https://web-test999.oss-cn-hangzhou.aliyuncs.com/login-background.png"
+  src="https://web-test999.oss-cn-hangzhou.aliyuncs.com/login-background.png"
+/>
+    <van-image
+  width="180rpx"
+  height="180rpx"
+  lazy-load
+  radius='5px'
+  custom-class="sign_img"
+  bind:click="previewImg"
+  data-src="https://web-test999.oss-cn-hangzhou.aliyuncs.com/login-background.png"
+  src="https://web-test999.oss-cn-hangzhou.aliyuncs.com/login-background.png"
+/>
+    <van-image
+  width="180rpx"
+  height="180rpx"
+  lazy-load
+  radius='5px'
+  custom-class="sign_img"
+  bind:click="previewImg"
+  data-src="https://web-test999.oss-cn-hangzhou.aliyuncs.com/login-background.png"
+  src="https://web-test999.oss-cn-hangzhou.aliyuncs.com/login-background.png"
+/>
+    <van-image
+  width="180rpx"
+  height="180rpx"
+  lazy-load
+  radius='5px'
+  custom-class="sign_img"
+  bind:click="previewImg"
+  data-src="https://web-test999.oss-cn-hangzhou.aliyuncs.com/login-background.png"
+  src="https://web-test999.oss-cn-hangzhou.aliyuncs.com/login-background.png"
+/>
+  </view>
+</view>
+</van-popup>

@@ -7,10 +7,10 @@ wx.$http = $http; // 将$http实例挂载到wx对象上，方便全局访问
 // 请求开始之前做一些事情
 $http.beforeRequest = function(options) {
   // 获取存储在本地的token
-  const token = wx.getStorageSync('token');
+  const token = wx.getStorageSync('accessToken');
   // 如果token存在，则添加到请求头中
   if (token) {
-    this.header['Authorization'] = `Bearer ${token}`;
+    this.header['accessToken'] = `${token}`;
   }
  wx.showLoading({
    title: '数据加载中...',

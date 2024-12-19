@@ -28,7 +28,9 @@ Page({
     let key = this.data.role === 'EMPLOYEE' || this.data.role === 'ADMIN' ?this.data.selectKey : '';
 
     const res = await ordersReq.getOrders(key);
-    if (res.code === 1) {
+    if (res.code === 1) 
+    {
+      // console.log(res.data);
       this.setData({ orderList: [...this.data.orderList, ...res.data] });
     } else {
       wx.showToast({

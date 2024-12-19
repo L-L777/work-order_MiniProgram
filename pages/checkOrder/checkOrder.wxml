@@ -1,0 +1,11 @@
+<!--pages/checkOrder/checkOrder.wxml-->
+<navBar name="验收工单" leftStatus='true'></navBar>
+<view  style="padding-top:{{navBarHeight}}rpx;  position: relative; width: 100vw;">
+  <van-image
+  width="100vw"
+  height="400rpx"
+  lazy-load
+  src="https://web-test999.oss-cn-hangzhou.aliyuncs.com/login-background.png"
+/>
+<button class="check_btn">验收工单</button>
+</view>

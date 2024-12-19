@@ -1,0 +1,13 @@
+/* pages/checkOrder/checkOrder.wxss */
+.check_btn{
+  margin-top: 50rpx;
+  width: 250rpx;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;align-items: center;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #005aff, #0099FF); /* 渐变色背景 */
+}

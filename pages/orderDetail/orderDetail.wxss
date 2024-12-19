@@ -1,0 +1,51 @@
+/* pages/orderDetail/orderDetail.wxss */
+.detail_page{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 50rpx;
+}
+.detail_page_btn{
+  margin-top: 50rpx;
+  border-radius: 30px;
+  font-size: 16px;
+  width: 500rpx;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;align-items: center;
+  font-weight: 700;
+  color: #fff;
+}
+.update_btn{
+    background-color: #6633CC;
+    }
+.status_btn{
+  background-color: #0033CC;
+}
+.check_btn{
+  background-color: #0066FF;
+}
+.history_btn{
+  background-color: #3366FF;
+}
+.worker_btnbox,.conductor_btnbox{
+  display: flex;
+  justify-content: space-evenly;
+  width: 90%;
+}
+.agree_btn{
+width: 40%;
+background-color: #33CCFF;
+}
+.delete_btn{
+  width: 40%;
+  background-color: #FF3399;
+  }
+  .sign_btn{
+    width: 40%;background-color: #6600CC;
+  }
+  .finish_btn{
+    width: 40%;
+    background-color: #33CC66;
+  }
+ 

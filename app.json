@@ -3,7 +3,11 @@
     "pages/index/index",
     "pages/home/home",
     "pages/person/person",
-    "pages/addOrder/addOrder"
+    "pages/addOrder/addOrder",
+    "pages/orderDetail/orderDetail",
+    "pages/checkOrder/checkOrder",
+    "pages/signHistory/signHistory",
+    "pages/sign/sign"
   ],
   "window": {
     "navigationBarTextStyle": "black",

@@ -20,7 +20,7 @@ register:(phone,password)=>{
 // 工单处理模块请求
 const ordersReq={
   // 获取工单列表(管理员/员工/施工方)
-  getOrders:(status,page,pageSize)=>{
+  getOrders:(status,page=1,pageSize=10)=>{
     const params={
       status,page,pageSize
     }
