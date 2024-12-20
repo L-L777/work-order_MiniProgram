@@ -3,7 +3,7 @@
 
 <view  style="position: fixed;top:{{navBarHeight}}rpx;  width: 100vw; height: 100rpx; background-color: white; z-index: 100;">
   <van-search
-value="{{ value }}"
+value="{{ searchValue }}"
 placeholder="请输入搜索关键词"
 show-action
 bind:search="onSearch"
@@ -13,16 +13,28 @@ custom-class="search_class"
 </view>
 <view  style="padding-top:{{navBarHeight+100}}rpx;  position: relative; width: 100vw;">
   <!-- 工单 -->
-<view class="orders_box {{role === 'EMPLOYEE' || role === 'ADMIN' ? 'worker ' : ''}}">
-  <!-- <block wx:for="{{orderList}}" wx:key="id">
-    <ordersCard order="{{item}}" btnshow='add'></ordersCard>
-  </block> -->
-  <ordersCard  btnshow='add'></ordersCard>
-  <ordersCard  btnshow='add'></ordersCard>
-  <ordersCard  btnshow='add'></ordersCard>
-  <ordersCard  btnshow='add'></ordersCard>
-  <ordersCard  btnshow='add'></ordersCard>
-  <ordersCard  btnshow='add'></ordersCard>
+<scroll-view 
+scroll-y="true"
+enable-flex
+refresher-enabled="true"
+refresher-triggered='{{refresh}}'
+bindrefresherrefresh="onRefresherRefresh"
+  bindscrolltolower="onScrollToLower"
+  style="height: {{300*length}}rpx; "
+class="orders_box ">
 
-</view>
+  <view class="every_box" wx:for="{{orderList}}" wx:key="id">
+    <ordersCard order="{{item}}"  btnshow='add'></ordersCard>
+  </view>
+  <view wx:if="{{pageLoading}}" class="loading">
+    <van-loading type="spinner" color="#1989fa" />
+  </view>
+  <!-- <ordersCard  btnshow='add'></ordersCard>
+  <ordersCard  btnshow='add'></ordersCard>
+  <ordersCard  btnshow='add'></ordersCard>
+  <ordersCard  btnshow='add'></ordersCard>
+  <ordersCard  btnshow='add'></ordersCard>
+  <ordersCard  btnshow='add'></ordersCard> -->
+
+</scroll-view>
 </view>

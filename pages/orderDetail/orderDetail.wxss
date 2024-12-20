@@ -16,10 +16,15 @@
   font-weight: 700;
   color: #fff;
 }
+.file_btn{
+  width: 40%;
+   background: linear-gradient(135deg, #00CCFF, #33FFFF); /* 渐变色背景 */
+}
 .update_btn{
     background-color: #6633CC;
     }
 .status_btn{
+  font-size: 14px;
   background-color: #0033CC;
 }
 .check_btn{
@@ -28,7 +33,7 @@
 .history_btn{
   background-color: #3366FF;
 }
-.worker_btnbox,.conductor_btnbox{
+.worker_btnbox,.conductor_btnbox,.file_btnbox{
   display: flex;
   justify-content: space-evenly;
   width: 90%;

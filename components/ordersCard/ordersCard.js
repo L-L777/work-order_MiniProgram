@@ -7,6 +7,7 @@ Component({
   properties: {
     order:{
       type: Object,
+      value:{},
     },
     btnshow:{
       type: String,
@@ -35,8 +36,15 @@ show:false,
     // 前往详情页面
     toDetail:function(){
 wx.navigateTo({
-  url: '/pages/orderDetail/orderDetail',
+  url: '/pages/orderDetail/orderDetail?id='+this.data.order.id,
 })
+    },
+  },
+  lifetimes: {
+    // 组件实例被挂载到页面节点树中时执行
+    attached: function() {
+      // console.log('Order:', this.data.order.id);
+
     },
   }
 })

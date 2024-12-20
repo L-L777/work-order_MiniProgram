@@ -7,7 +7,7 @@ Page({
    */
   data: {
     navBarHeight: app.globalData.navBarHeight,
-    role: app.globalData.role,
+    role: app.globalData.userInfo.role,
     userId: app.globalData.userId,
     status:-1,//判断当前是签到还是签退 （1签到，0签退）
     title:'',//导航栏标题
@@ -18,7 +18,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    this.setData({status:parseInt(options.status)})
+    this.setData({status:parseInt(options.status),  role: app.globalData.userInfo.role,})
     if(options.status==='1'){
       this.setData({title:'签到'})
     }else{

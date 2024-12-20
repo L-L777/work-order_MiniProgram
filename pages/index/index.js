@@ -75,12 +75,16 @@ Page({
       }
       // 交互
       try{
+        wx.showLoading({
+          title: '数据加载中...',
+        });
         const res=await enterReq.register(phone,password)
         if(res.code===1){
  wx.showToast({
   title: '注册成功',
   icon: 'success',
 });
+wx.hideLoading();
 // 变成登录表单进行登录操作
 this.setData({
   isLoginActive: true 
@@ -119,6 +123,9 @@ this.setData({
       
       // 交互
       try{
+        wx.showLoading({
+          title: '数据加载中...',
+        });
         const res=await enterReq.login(phone,password)
         if(res.code===1){
  wx.showToast({
@@ -126,11 +133,17 @@ this.setData({
   icon: 'success',
 });
 // 存token和用户权限
+if(res.data.role==='CONTRACTOR'){
+  console.log(111);
+  res.data.role='WORKER'
+}
 wx.setStorageSync('accessToken', res.data.accessToken);
 wx.setStorageSync('refreshToken', res.data.refreshToken);
+wx.setStorageSync('userInfo', {phone,role:res.data.role});
 app.globalData.userId=res.data.userId
-app.globalData.role=res.data.role
-app.globalData.phone=phone
+app.globalData.userInfo.role=res.data.role
+app.globalData.userInfo.phone=phone
+wx.hideLoading();
 // 跳转到首页
 wx.switchTab({ url: '/pages/home/home', });
         }

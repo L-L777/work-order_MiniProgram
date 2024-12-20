@@ -1,4 +1,5 @@
 <!--pages/orderDetail/orderDetail.wxml-->
+ 
 <navBar name="工单详情" leftStatus='true'></navBar>
 <view class="detail_page" style="padding-top:{{navBarHeight}}rpx;  position: relative; width: 100vw;">
   <van-image
@@ -7,22 +8,28 @@
   lazy-load
   src="https://web-test999.oss-cn-hangzhou.aliyuncs.com/login-background.png"
 />
-
-<button class="detail_page_btn update_btn" bind:tap="updateOrder">修改工单</button>
-<button class="detail_page_btn status_btn ">施工状态：施工中</button>
-<button class="detail_page_btn check_btn" bind:tap="detailOrder">查看工单信息</button>
-<button class="detail_page_btn history_btn" bind:tap="signHistory">施工方历史签到签退记录</button>
-<view class="worker_btnbox">
-  <button class="detail_page_btn agree_btn" bind:tap="checkOrder">验收工单</button>
-<button class="detail_page_btn delete_btn">删除工单</button>
+<!-- 引入web-view组件 -->
+<!-- <web-view src="{{fileLink1}}"></web-view> -->
+<view class=".file_btnbox">
+  <button class="detail_page_btn file_btn" data-src="{{fileLink1}}" bind:tap="fileCheck">查看附件一</button>
+<button class="detail_page_btn file_btn" data-src="{{fileLink2}}" bind:tap="fileCheck">查看附件二</button>
 </view>
-<view class="conductor_btnbox">
+<view wx:if="{{role==='EMPLOYEE'||role==='ADMIN'}}" class="worker_btnbox">
+  <button class="detail_page_btn agree_btn" bind:tap="checkOrder">验收工单</button>
+<button class="detail_page_btn delete_btn" bind:tap="deleteOrder">删除工单</button>
+</view>
+<view wx:if="{{role==='WORKER'}}" class="conductor_btnbox">
   <button class="detail_page_btn sign_btn" bind:tap="sign" data-status="1">签到</button>
   <!-- <button class="detail_page_btn sign_btn" bind:tap="sign" data-status="0">签退</button> -->
-<button class="detail_page_btn finish_btn" >结束工程</button>
+<button class="detail_page_btn finish_btn" bind:tap="finish" >结束工程</button>
 </view>
+<button wx:if="{{role==='EMPLOYEE'||role==='ADMIN'}}" class="detail_page_btn update_btn" bind:tap="updateOrder">修改工单</button>
+<button class="detail_page_btn status_btn " bind:tap="confirm">施工状态：{{detailMessage.status}}</button>
+<button class="detail_page_btn check_btn" bind:tap="detailOrder">查看工单信息</button>
+<button class="detail_page_btn history_btn" bind:tap="signHistory">施工方历史签到签退记录</button>
+
 
 </view>
 
 <!-- 修改工单和工单信息弹出框 -->
-<pop createShow='{{updateShow}}' detailShow='{{detailShow}}' bind:closeCreate="onClose" bind:closeDetail="onClose"></pop>
+<pop wx:if="{{updateShow||detailShow}}" createShow='{{updateShow}}' detailShow='{{detailShow}}' detailMessage='{{detailMessage}}' bind:closeCreate="onClose" bind:closeDetail="onClose"></pop>

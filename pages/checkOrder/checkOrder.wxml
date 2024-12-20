@@ -5,7 +5,7 @@
   width="100vw"
   height="400rpx"
   lazy-load
-  src="https://web-test999.oss-cn-hangzhou.aliyuncs.com/login-background.png"
+  src="{{imgSrc}}"
 />
-<button class="check_btn">验收工单</button>
+<button class="check_btn" bind:tap="check">验收工单</button>
 </view>

@@ -1,4 +1,5 @@
 // components/pop/pop.js
+import { ordersReq } from "../../utils/api.js";
 Component({
 
   /**
@@ -13,6 +14,14 @@ Component({
     },
     signShow:{
       type:Boolean
+    },
+    detailMessage:{
+      type:Object,
+      value:{}
+    },
+    orderId:{
+      type:Number,
+      value:0
     }
   },
 
@@ -20,7 +29,13 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+ // 绑定提交工单输入字段的值
+ customerName: '',
+ customerPhone: '',
+ employeeName: '',
+ employeePhone: '',
+ constructionName: '',
+ constructionPhone: '',
   },
 
   /**
@@ -37,14 +52,11 @@ messageSubmit:function(){
  // 调用自定义方法，发送数据到父组件
  this.triggerEvent('closeCreate', { data: '关闭弹窗' });
 },
-
-
 // 关闭查看工单信息弹窗
 onDetailClose:function(){
   // 调用自定义方法，发送数据到父组件
   this.triggerEvent('closeDetail', { data: '关闭弹窗' });
  },
-
  // 关闭查看历史签到签退信息弹窗
  onSignClose:function(){
   // 调用自定义方法，发送数据到父组件
@@ -60,5 +72,11 @@ previewImg: function(e) {
     urls:imgList,  //需要预览的图片链接列表
   });
 }
+  },
+  lifetimes: {
+    // 组件实例被挂载到页面节点树中时执行
+    attached: function() {
+      // console.log(this.data.orderId);
+    },
   }
 })

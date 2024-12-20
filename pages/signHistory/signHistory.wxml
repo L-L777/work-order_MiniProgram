@@ -47,4 +47,4 @@
 
 </view>
 <!-- 历史签到签退信息弹出框 -->
-<pop signShow='{{signShow}}' bind:closeSign="onClose"></pop>
+<pop wx:if="{{signShow}}" signShow='{{signShow}}' bind:closeSign="onClose"></pop>

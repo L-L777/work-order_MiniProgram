@@ -9,6 +9,20 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/person/person",
+          "pathName": "pages/person/person",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/addOrder/addOrder",
+          "pathName": "pages/addOrder/addOrder",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/orderDetail/orderDetail",
           "pathName": "pages/orderDetail/orderDetail",
           "query": "",

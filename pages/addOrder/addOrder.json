@@ -2,6 +2,7 @@
   "usingComponents": {
     "navBar":"../../components/navBar/navBar",
     "van-search": "@vant/weapp/search/index",
-    "ordersCard":"../../components/ordersCard/ordersCard"
+    "ordersCard":"../../components/ordersCard/ordersCard",
+    "van-loading": "@vant/weapp/loading/index"
   }
 }

@@ -8,63 +8,64 @@
   custom-style="height: 70%"
   z-index='1000'
   bind:close="onCreateClose"
+  lock-scroll
+  root-portal
 >
-<view class="add_message_box">
-<form  bindsubmit="messageSubmit">
-  <van-cell-group >
-  <van-field
+  <view class="add_message_box">
+    <form bindsubmit="messageSubmit">
+      <van-cell-group>
+        <van-field
+          name="customerName"
+          required
+          clearable
+          label="客户名称："
+          placeholder="请输入客户名称"
+        />
+        
+        <van-field
+          name="customerPhone"
+          type="number"
+          label="客户电话："
+          placeholder="请输入客户电话"
+          required
+        />
+        
+        <van-field
+          name="employeeName"
+          required
+          clearable
+          label="南网员工名称："
+          placeholder="请输入南网员工名称"
+        />
+        
+        <van-field
+          name="employeePhone"
+          type="number"
+          label="南网员工电话："
+          placeholder="请输入南网员工电话"
+          required
+        />
+        
+        <van-field
+          name="constructionName"
+          required
+          clearable
+          label="施工方名称："
+          placeholder="请输入施工方名称"
     
-    required
-    clearable
-    label="客户名称："
-    placeholder="请输入客户名称"
-    bind:click-icon="onClickIcon"
-  />
-
-  <van-field
-    
-    type="password"
-    label="客户电话："
-    placeholder="请输入客户电话"
-    required
-  />
-  <van-field
-    
-    required
-    clearable
-    label="南网员工名称："
-    placeholder="请输入南网员工名称"
-    bind:click-icon="onClickIcon"
-  />
-
-  <van-field
-    
-    type="password"
-    label="南网员工电话："
-    placeholder="请输入南网员工电话"
-    required
-  />
-  <van-field
-   
-    required
-    clearable
-    label="施工方名称："
-    placeholder="请输入施工方名称"
-    bind:click-icon="onClickIcon"
-  />
-
-  <van-field
-    
-    type="password"
-    label="施工方电话："
-    placeholder="请输入施工方电话"
-    required
-  />
-</van-cell-group>
-<button formType="submit" class="message-submit-btn">确认</button>
-</form>
-
-</view>
+        />
+        
+        <van-field
+          name="constructionPhone"
+          type="number"
+          label="施工方电话："
+          placeholder="请输入施工方电话"
+          required
+        />
+      </van-cell-group>
+      <button formType="submit" class="message-submit-btn">确认</button>
+    </form>
+  </view>
 </van-popup>
 
 <!-- 查看工单信息弹窗 -->
@@ -76,21 +77,23 @@
   custom-style="height: 70%"
   z-index='1000'
   bind:close="onDetailClose"
+  lock-scroll 
+  root-portal
 >
 <view class="detail_box"> 
-<view class="detail_msg">业扩工单号：<text>12312312321</text></view>
-<view class="detail_msg">所属供电所：<text>南方电网湛江局</text></view>
-<view class="detail_msg">所属员工：<text>张三</text></view>
-<view class="detail_msg">所属员工手机号：<text>12312312321</text></view>
-<view class="detail_msg">客户名称：<text>李四</text></view>
-<view class="detail_msg">客户地址：<text>广东工业大学</text></view>
-<view class="detail_msg">客户编码：<text>00001111</text></view>
-<view class="detail_msg">施工方名称：<text>赵五</text></view>
-<view class="detail_msg">施工方手机号：<text>1397787722626</text></view>
-<view class="detail_msg">交单日期：<text>2024-12-20</text></view>
-<view class="detail_msg">接单日期：<text>2024-12-21</text></view>
-<view class="detail_msg">完成回单日期：<text>2024-12-30</text></view>
-<view class="detail_msg">验收时间：<text>2024-12-31</text></view>
+<view class="detail_msg">业扩工单号：<text>{{detailMessage.orderNumber}}</text></view>
+<view class="detail_msg">所属供电所：<text>{{detailMessage.powerStation}}</text></view>
+<view class="detail_msg">所属员工：<text>{{detailMessage.employeeName}}</text></view>
+<view class="detail_msg">所属员工手机号：<text>{{detailMessage.employeePhone}}</text></view>
+<view class="detail_msg">客户名称：<text>{{detailMessage.customerName}}</text></view>
+<view class="detail_msg">客户地址：<text>{{detailMessage.customerAddress}}</text></view>
+<view class="detail_msg">客户编码：<text>{{detailMessage.customerCode}}</text></view>
+<view class="detail_msg">施工方名称：<text>{{detailMessage.workerName}}</text></view>
+<view class="detail_msg">施工方手机号：<text>{{detailMessage.workerPhone}}</text></view>
+<view class="detail_msg">交单日期：<text>{{detailMessage.orderDeliveryDate}}</text></view>
+<view class="detail_msg">接单日期：<text>{{detailMessage.orderAcceptDate}}</text></view>
+<view class="detail_msg">完成回单日期：<text>{{detailMessage.completionDate}}</text></view>
+<view class="detail_msg">验收时间：<text>{{detailMessage.acceptanceTime}}</text></view>
 </view>
 </van-popup>
 
@@ -103,6 +106,8 @@
   custom-style="height: 70%"
   z-index='1000'
   bind:close="onSignClose"
+  lock-scroll 
+  root-portal
 >
 <view class="sign_box"> 
   <view class="sign_msg">签到：</view>

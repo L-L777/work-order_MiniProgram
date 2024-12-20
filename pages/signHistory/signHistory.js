@@ -7,7 +7,7 @@ Page({
    */
   data: {
     navBarHeight: app.globalData.navBarHeight,
-    role: app.globalData.role,
+    role: app.globalData.userInfo.role,
     userId: app.globalData.userId,
     signShow:false,//历史签到签退信息弹出框状态
   },

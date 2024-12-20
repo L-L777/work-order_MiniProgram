@@ -9,7 +9,7 @@ page{
   position: fixed;
   width: 100vw;
   height: 100rpx;
-  background-color: #3399FF;
+  background-color: #2190ff;
   display: flex;
   z-index: 5000;
 }
@@ -27,7 +27,7 @@ page{
   transition: background-color 0.3s, color 0.3s;
 }
 .cur_select_btn{
-  background-color: #3333FF;
+  background-color: #0d76ff;
 }
 .all_order_btn{
   border-top-right-radius: 20px;
@@ -45,16 +45,21 @@ page{
 
 /* 工单盒子 */
 .orders_box{
+  width: 100vw;
   margin-top: 10rpx;
+}
+.every_box{
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 100vw;
 }
 /* 南网员工进入页面存储工单大盒子类名 */
 .worker{
   width: 100vw;
   margin-top: 210rpx;
 }
+
 /* 发布工单按钮 */
 .publish{
   position: fixed;
@@ -70,4 +75,10 @@ page{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.loading{
+  width: 100vw;
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: center;
 }

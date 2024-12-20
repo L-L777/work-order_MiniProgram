@@ -49,13 +49,20 @@
   align-items: center;
   border-top-right-radius: 30px;
 }
-.unfinish{
+.unconfirm{
+  width: 120rpx;
   background-color: #FF0099;
 }
 .appending{
+  width: 120rpx;
   background-color: #3366FF;
 }
 .finish{
   background-color: #00CC33;
 }
-
+.unstart{
+  background-color: #3366FF;
+}
+.unagree{
+  background-color: #CC99FF;
+}

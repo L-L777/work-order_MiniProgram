@@ -1,7 +1,7 @@
 import axios from './axios.js';
 import handleErrors from "./handleError.js"
 const $http = new axios({
-  baseUrl: 'http://117.72.95.156:8082/api' // 设置请求根路径
+  baseUrl: 'http://117.72.95.156:6100/api' // 设置请求根路径
 });
 wx.$http = $http; // 将$http实例挂载到wx对象上，方便全局访问
 // 请求开始之前做一些事情
@@ -12,9 +12,6 @@ $http.beforeRequest = function(options) {
   if (token) {
     this.header['accessToken'] = `${token}`;
   }
- wx.showLoading({
-   title: '数据加载中...',
- });
 };
 let isRefreshing = false;
 let refreshCount = 0;
@@ -22,7 +19,6 @@ let requestQueue=[];
 const MAX_REFRESH_COUNT = 5;
 // 请求完成之后做一些事情
 $http.afterRequest = async function(res, resolve, reject) {
-  wx.hideLoading();
   // console.log('isRefreshing', isRefreshing);
   refreshCount++;
 
