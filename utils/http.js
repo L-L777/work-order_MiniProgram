@@ -14,18 +14,16 @@ $http.beforeRequest = function(options) {
   }
 };
 let isRefreshing = false;
-let refreshCount = 0;
 let requestQueue=[];
-const MAX_REFRESH_COUNT = 5;
+
 // 请求完成之后做一些事情
 $http.afterRequest = async function(res, resolve, reject) {
   // console.log('isRefreshing', isRefreshing);
-  refreshCount++;
-
-  if (res.statusCode === 401 && !isRefreshing && refreshCount < MAX_REFRESH_COUNT) {
+  if (res.statusCode === 401 && !isRefreshing) {
     console.log('endRequest', res);
     const config = res.config;
     requestQueue.push(config);
+    // console.log(requestQueue[0]);
     let refreshToken = wx.getStorageSync('refreshToken');
     console.log('refreshToken');
     console.log(refreshToken);
@@ -35,10 +33,11 @@ $http.afterRequest = async function(res, resolve, reject) {
     } else if (!isRefreshing) {
       isRefreshing = true;
       try {
-        const response = await $http.get('/user/refreshToken', {}, { refreshToken });
-        console.log(response);
+        const response = await wx.$http.get('/user/refreshToken', {}, { refreshToken });
+        console.log(response.data.accessToken);
         wx.setStorageSync('accessToken', response.data.accessToken);
         wx.setStorageSync('refreshToken', response.data.refreshToken);
+        console.log(111);
         // 重试队列中的请求
         retryQueue();
         isRefreshing = false;
@@ -73,18 +72,23 @@ $http.afterRequest = async function(res, resolve, reject) {
 
   async function retryQueue() {
     while (requestQueue.length > 0) {
+      console.log(requestQueue[0]);
       const queuedRequest = requestQueue.shift();
       sendRequest(queuedRequest);
     }
   }
 
   async function sendRequest(requestConfig) {
-    wx.$http._(requestConfig)
+    Object.assign($http,requestConfig)
+    console.log($http);
+    $http._sendRequest()
       .then((response) => {
-        requestConfig.resolve(response);
+        // console.log(response);
+        resolve(response.data);
       })
       .catch((error) => {
-        requestConfig.reject(error);
+        // console.log(error);
+        reject(error);
       });
   }
 };
