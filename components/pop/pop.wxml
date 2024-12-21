@@ -81,19 +81,19 @@
   root-portal
 >
 <view class="detail_box"> 
-<view class="detail_msg">业扩工单号：<text>{{detailMessage.orderNumber}}</text></view>
-<view class="detail_msg">所属供电所：<text>{{detailMessage.powerStation}}</text></view>
-<view class="detail_msg">所属员工：<text>{{detailMessage.employeeName}}</text></view>
-<view class="detail_msg">所属员工手机号：<text>{{detailMessage.employeePhone}}</text></view>
-<view class="detail_msg">客户名称：<text>{{detailMessage.customerName}}</text></view>
-<view class="detail_msg">客户地址：<text>{{detailMessage.customerAddress}}</text></view>
-<view class="detail_msg">客户编码：<text>{{detailMessage.customerCode}}</text></view>
-<view class="detail_msg">施工方名称：<text>{{detailMessage.workerName}}</text></view>
-<view class="detail_msg">施工方手机号：<text>{{detailMessage.workerPhone}}</text></view>
-<view class="detail_msg">交单日期：<text>{{detailMessage.orderDeliveryDate}}</text></view>
-<view class="detail_msg">接单日期：<text>{{detailMessage.orderAcceptDate}}</text></view>
-<view class="detail_msg">完成回单日期：<text>{{detailMessage.completionDate}}</text></view>
-<view class="detail_msg">验收时间：<text>{{detailMessage.acceptanceTime}}</text></view>
+<view class="detail_msg"><label>业扩工单号：</label><text>{{detailMessage.orderNumber}}</text></view>
+<view class="detail_msg"><label>所属供电所：</label><text>{{detailMessage.powerStation}}</text></view>
+<view class="detail_msg"><label>所属员工：</label><text>{{detailMessage.employeeName}}</text></view>
+<view class="detail_msg"><label>所属员工手机号：</label><text>{{detailMessage.employeePhone}}</text></view><label></label>
+<view class="detail_msg"><label>客户名称：</label><text>{{detailMessage.customerName}}</text></view>
+<view class="detail_msg"><label>客户地址：</label><text>{{detailMessage.customerAddress}}</text></view>
+<view class="detail_msg"><label>客户编码：</label><text>{{detailMessage.customerCode}}</text></view>
+<view class="detail_msg"><label>施工方名称：</label><text>{{detailMessage.workerName}}</text></view>
+<view class="detail_msg"><label>施工方手机号：</label><text>{{detailMessage.workerPhone}}</text></view>
+<view class="detail_msg"><label>交单日期：</label><text>{{detailMessage.orderDeliveryDate}}</text></view>
+<view class="detail_msg"><label>接单日期：</label><text>{{detailMessage.orderAcceptDate}}</text></view>
+<view class="detail_msg"><label>完成回单日期：</label><text>{{detailMessage.completionDate}}</text></view>
+<view class="detail_msg"><label>验收时间：</label><text>{{detailMessage.acceptanceTime}}</text></view>
 </view>
 </van-popup>
 
@@ -159,4 +159,43 @@
 />
   </view>
 </view>
+</van-popup>
+
+<!-- 修改密码弹窗 -->
+<van-popup
+  show="{{ passwordShow }}"
+  round
+  closeable
+  position="bottom"
+  custom-style="height: 70%"
+  z-index='1000'
+  bind:close="onPasswordClose"
+  lock-scroll
+  root-portal
+>
+  <view class="update_password_box">
+    <form bindsubmit="passwordSubmit">
+      <van-cell-group>
+        <van-field
+          name="password"
+          type="password"
+          required
+          clearable
+          label="密码："
+          placeholder="请输入密码："
+        />
+        
+        <van-field
+          name="confirmPassword"
+          type="password"
+          label="确认密码："
+          placeholder="请确认密码："
+          required
+        />
+        
+       
+      </van-cell-group>
+      <button formType="submit" class="password-submit-btn">修改密码</button>
+    </form>
+  </view>
 </van-popup>

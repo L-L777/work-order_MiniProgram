@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-    "van-image": "@vant/weapp/image/index",
     "navBar":"../../components/navBar/navBar",
     "pop":"../../components/pop/pop"
   }

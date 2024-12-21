@@ -5,6 +5,13 @@ Page({
   data: {
     isLoginActive: true // 默认登录按钮为激活状态
   },
+  onLoad(){
+    if(wx.getStorageSync('accessToken')){
+      wx.switchTab({
+        url: '/pages/home/home',
+      })
+    }
+  },
   // 切换到登录表单
   onLoginClick() {
     this.setData({
@@ -134,10 +141,6 @@ this.setData({
   icon: 'success',
 });
 // 存token和用户权限
-if(res.data.role==='CONTRACTOR'){
-  console.log(111);
-  res.data.role='WORKER'
-}
 wx.setStorageSync('accessToken', res.data.accessToken);
 wx.setStorageSync('refreshToken', res.data.refreshToken);
 wx.setStorageSync('userInfo', {phone,role:res.data.role});

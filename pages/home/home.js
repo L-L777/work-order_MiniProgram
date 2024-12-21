@@ -75,7 +75,8 @@ Page({
     this.setData({pageLoading:false, refresh:false,})
   },
   // 滑动分页加载
-  onScrollToLower: function() {    
+  onReachBottom() {    
+    // console.log(111);
     if (this.data.hasMore) {
       this.setData({page:this.data.page+1 },() => {
         this.fetchOrders();
@@ -83,9 +84,9 @@ Page({
     }
   },
     // 下拉刷新事件处理函数
-    onRefresherRefresh: function() {
+    onPullDownRefresh() {
       this.setData({
-        orderList: [], // 重置订单列表
+        orderList: [],
         pageLoading: true,
         refresh:true ,
         length:0,

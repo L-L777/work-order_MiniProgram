@@ -67,6 +67,7 @@ Page({
         const filePath = res.tempFilePath
         wx.openDocument({
           filePath: filePath,
+          showMenu: true,
           success: function (res) {
             // console.log('打开文档成功')
           },
@@ -74,6 +75,7 @@ Page({
             // console.log('打开文档失败')
           },
         })
+        
       }
     })
   },

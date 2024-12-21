@@ -2,13 +2,13 @@
 <navBar name="工单首页"></navBar>
 <view style="padding-top:{{navBarHeight}}rpx; padding-bottom:{{tabBarHeight}}rpx; position: relative; width: 100vw;"> 
 <!-- 筛选按钮 -->
-<view wx:if="{{role === 'EMPLOYEE' || role === 'ADMIN'}}" class="select_box">
+<view wx:if="{{role === 'EMPLOYEE' || role === 'ADMIN'}}" class="select_box" style="top:{{navBarHeight}}rpx;">
   <button class="select_btn all_order_btn {{allSelectActive ? 'cur_select_btn' : ''}}" bindtap="allSelectClick">全部工单</button>
   <button class="select_btn my_order_btn {{!allSelectActive ? 'cur_select_btn' : ''}}" bindtap="mySelectClick">我的工单</button>
 </view>
 
 <!-- 搜索框 -->
-<view  style="position: fixed;top:{{role === 'EMPLOYEE' || role === 'ADMIN' ? navBarHeight + 90 : navBarHeight }}rpx;  width: 100vw; height: 100rpx; background-color: white; z-index: 5000;">
+<view  style="position: fixed;top:{{role === 'EMPLOYEE' || role === 'ADMIN' ? navBarHeight + 90 : navBarHeight }}rpx;  width: 100vw; height: 100rpx; background-color: white; z-index: 5000;" >
   <van-search
 value="{{ searchValue }}"
 placeholder="请输入搜索关键词"
@@ -21,18 +21,14 @@ custom-class="search_class"
 
 <!-- 工单 -->
 <!-- 滑动到第十张卡片时获取下一页数据 一张卡片高300rpx margin-top:20rpx -->
-<scroll-view
-scroll-y="true"
-enable-flex
-refresher-enabled="true"
-refresher-triggered='{{refresh}}'
-bindrefresherrefresh="onRefresherRefresh"
-  bindscrolltolower="onScrollToLower"
-  style="height: {{320*length-20}}rpx; "
- class="orders_box {{role === 'EMPLOYEE' || role === 'ADMIN' ? 'worker ' : ''}}">
-  <view class="every_box" wx:for="{{orderList}}" wx:key="id">
+<view
+
+ class="orders_box {{role === 'EMPLOYEE' || role === 'ADMIN' ? 'worker ' : ''}}"
+ enablePullDownRefresh
+ >
+  <block  wx:for="{{orderList}}" wx:key="id">
     <ordersCard order="{{item}}" btnshow='detail'></ordersCard>
-  </view>
+  </block>
   <!-- <ordersCard  btnshow='detail'> </ordersCard>
   <ordersCard  btnshow='detail'> </ordersCard>
   <ordersCard  btnshow='detail'> </ordersCard> -->
@@ -41,7 +37,7 @@ bindrefresherrefresh="onRefresherRefresh"
   </view>
  
 
-</scroll-view>
+</view>
 </view>
 
 <!-- 发布工单按钮 -->

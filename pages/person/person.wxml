@@ -6,10 +6,35 @@
 </view>
   <view class="message_box">
     <view>用户名（手机号）：{{phone}}</view>
-    <button class="person_btn update_password">修改密码</button>
+    <button class="person_btn update_password" bind:tap="updatePassword">修改密码</button>
     <button class="person_btn login_out" bind:tap="loginout">退出登录</button>
   </view>
   
+  <view class="usermotto">
+    <!-- 环绕效果 -->
+    <view id="page">
+      <view id="container">
+        <view id="ring"></view>
+        <view id="ring"></view>
+        <view id="ring"></view>
+        <view id="ring"></view>
+      </view>
+    </view>
+    <!-- 南方电网字样 -->
+    <view class="loader">
+      <text class="text">
+        南方
+        电网
+      </text>
+    </view>
+  </view>
+
 </view>
+
+<!-- 修改密码弹出窗 -->
+<pop wx:if="{{passwordShow}}" passwordShow='{{passwordShow}}' bind:closePassword="onClose"></pop>
+
+<!-- 动画效果 -->
+
 
 <tabBar active="1"></tabBar>

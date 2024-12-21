@@ -13,19 +13,13 @@ custom-class="search_class"
 </view>
 <view  style="padding-top:{{navBarHeight+100}}rpx;  position: relative; width: 100vw;">
   <!-- 工单 -->
-<scroll-view 
-scroll-y="true"
-enable-flex
-refresher-enabled="true"
-refresher-triggered='{{refresh}}'
-bindrefresherrefresh="onRefresherRefresh"
-  bindscrolltolower="onScrollToLower"
-  style="height: {{300*length}}rpx; "
+<view 
+
 class="orders_box ">
 
-  <view class="every_box" wx:for="{{orderList}}" wx:key="id">
+  <block  wx:for="{{orderList}}" wx:key="id">
     <ordersCard order="{{item}}"  btnshow='add'></ordersCard>
-  </view>
+  </block>
   <view wx:if="{{pageLoading}}" class="loading">
     <van-loading type="spinner" color="#1989fa" />
   </view>
@@ -36,5 +30,5 @@ class="orders_box ">
   <ordersCard  btnshow='add'></ordersCard>
   <ordersCard  btnshow='add'></ordersCard> -->
 
-</scroll-view>
+</view>
 </view>

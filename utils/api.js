@@ -99,4 +99,15 @@ const ordersReq={
     return $http.put('/orders/sign',data)
   },
 }
-module.exports={enterReq,ordersReq}
+
+// 个人信息处理模块
+const privateReq={
+  // 修改密码
+updatePassword:(phone,password)=>{
+  const data={
+    phone,password
+  }
+  return $http.put('/user',data)
+}
+}
+module.exports={enterReq,ordersReq,privateReq}

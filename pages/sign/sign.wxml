@@ -1,6 +1,6 @@
 <!--pages/sign/sign.wxml-->
 <navBar name="{{title}}" leftStatus='true'></navBar>
-<view class="sign_in_out_page" style="padding-top:{{navBarHeight}}rpx;  position: relative; width: 100vw;">
+<view class="sign_in_out_page" style="padding-top:{{navBarHeight+10}}rpx;  position: relative; width: 100vw;">
 <view class="sign_in_out_card">
 <view class="text_box">
   <form  bindsubmit="signSubmit" class="sign_form">
@@ -12,8 +12,8 @@
     placeholder="请输入工程进度"
     
     required
-  /> -->
-  <!-- <van-field
+  />
+  <van-field
   type="textarea"
     name="description"
     label="描述："
@@ -26,12 +26,11 @@
           <label class="label">描述：</label>
           <textarea
           class="custom-sign-input"
-            class="textarea"
+
             placeholder="点击输入工程描述:(最多1000字)"
             auto-height="{{true}}"
             fixed="{{false}}"
             maxlength="1000"
-            required
             bindinput="onDescriptionInput"
           />
         </view>

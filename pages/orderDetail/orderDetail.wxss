@@ -5,6 +5,39 @@
   align-items: center;
   padding-bottom: 50rpx;
 }
+/* 工单信息 */
+.detail_title{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  height: 70rpx;
+  font-size: 18px;
+  font-weight: 700;
+  color: #666666;
+}
+.detail_card{
+  background: linear-gradient(to bottom, #E8EEFF, #c3dbf2); /* 渐变色背景 */
+  width: 85vw;
+  border-radius: 30px;
+  box-shadow: 0 5rpx 10rpx rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+  margin-top: 30rpx;
+  box-sizing: border-box;
+  padding: 50rpx;
+}
+.detail_box{
+  font-size: 14px;
+  color:#777777 ;
+}
+.detail_msg{
+margin-top: 30rpx;
+border-bottom: 1px solid #EEEEEE;
+word-wrap: break-word; /* 允许在单词内换行 */
+  overflow-wrap: break-word; /* 同上，为了更好的兼容性 */
+}
+
+
+/* 按钮 */
 .detail_page_btn{
   margin-top: 50rpx;
   border-radius: 30px;

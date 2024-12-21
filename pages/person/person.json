@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "tabBar":"../../components/tabBar/tabBar",
-    "navBar":"../../components/navBar/navBar"
+    "navBar":"../../components/navBar/navBar",
+    "pop":"../../components/pop/pop"
   }
 }

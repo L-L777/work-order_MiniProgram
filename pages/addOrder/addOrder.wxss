@@ -8,14 +8,10 @@
 .orders_box{
   margin-top: 10rpx;
   padding-bottom:30rpx ;
-}
-.every_box{
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 100vw;
 }
-
 .loading{
   width: 100vw;
   margin-top: 20rpx;

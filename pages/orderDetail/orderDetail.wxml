@@ -2,14 +2,26 @@
  
 <navBar name="工单详情" leftStatus='true'></navBar>
 <view class="detail_page" style="padding-top:{{navBarHeight}}rpx;  position: relative; width: 100vw;">
-  <van-image
-  width="100vw"
-  height="400rpx"
-  lazy-load
-  src="https://web-test999.oss-cn-hangzhou.aliyuncs.com/login-background.png"
-/>
 <!-- 引入web-view组件 -->
 <!-- <web-view src="{{fileLink1}}"></web-view> -->
+<view class="detail_card">
+<view class="detail_title">工单信息</view>
+  <view class="detail_box"> 
+<view class="detail_msg"><label>业扩工单号：</label><text>{{detailMessage.orderNumber}}</text></view>
+<view class="detail_msg"><label>所属供电所：</label><text>{{detailMessage.powerStation}}</text></view>
+<view class="detail_msg"><label>所属员工：</label><text>{{detailMessage.employeeName}}</text></view>
+<view class="detail_msg"><label>所属员工手机号：</label><text>{{detailMessage.employeePhone}}</text></view><label></label>
+<view class="detail_msg"><label>客户名称：</label><text>{{detailMessage.customerName}}</text></view>
+<view class="detail_msg"><label>客户地址：</label><text>{{detailMessage.customerAddress}}</text></view>
+<view class="detail_msg"><label>客户编码：</label><text>{{detailMessage.customerCode}}</text></view>
+<view class="detail_msg"><label>施工方名称：</label><text>{{detailMessage.workerName}}</text></view>
+<view class="detail_msg"><label>施工方手机号：</label><text>{{detailMessage.workerPhone}}</text></view>
+<view class="detail_msg"><label>交单日期：</label><text>{{detailMessage.orderDeliveryDate}}</text></view>
+<view class="detail_msg"><label>接单日期：</label><text>{{detailMessage.orderAcceptDate}}</text></view>
+<view class="detail_msg"><label>完成回单日期：</label><text>{{detailMessage.completionDate}}</text></view>
+<view class="detail_msg"><label>验收时间：</label><text>{{detailMessage.acceptanceTime}}</text></view>
+</view>
+</view>
 <view class=".file_btnbox">
   <button class="detail_page_btn file_btn" data-src="{{fileLink1}}" bind:tap="fileCheck">查看附件一</button>
 <button class="detail_page_btn file_btn" data-src="{{fileLink2}}" bind:tap="fileCheck">查看附件二</button>
@@ -25,7 +37,7 @@
 </view>
 <button wx:if="{{role==='EMPLOYEE'||role==='ADMIN'}}" class="detail_page_btn update_btn" bind:tap="updateOrder">修改工单</button>
 <button class="detail_page_btn status_btn " bind:tap="confirm">施工状态：{{detailMessage.status}}</button>
-<button class="detail_page_btn check_btn" bind:tap="detailOrder">查看工单信息</button>
+<!-- <button class="detail_page_btn check_btn" bind:tap="detailOrder">查看工单信息</button> -->
 <button class="detail_page_btn history_btn" bind:tap="signHistory">施工方历史签到签退记录</button>
 
 
