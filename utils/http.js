@@ -1,7 +1,7 @@
 import axios from './axios.js';
 import handleErrors from "./handleError.js"
 const $http = new axios({
-  baseUrl: 'http://117.72.95.156:6100/api' // 设置请求根路径
+  baseUrl: 'http://117.72.95.156:8082/api' // 设置请求根路径
 });
 wx.$http = $http; // 将$http实例挂载到wx对象上，方便全局访问
 // 请求开始之前做一些事情
@@ -60,14 +60,14 @@ $http.afterRequest = async function(res, resolve, reject) {
   async function handleLoginExpired() {
     wx.removeStorageSync('refreshToken');
     wx.removeStorageSync('accessToken');
+    refreshCount = 0;
+    // await wait(500);
+    wx.reLaunch({
+      url: "/pages/index/index"
+    });
     wx.showToast({
       title: "登录过期",
       icon: "error"
-    });
-    refreshCount = 0;
-    await wait(500);
-    wx.reLaunch({
-      url: "/pages/index/index"
     });
   }
 

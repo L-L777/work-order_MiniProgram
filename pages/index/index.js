@@ -127,6 +127,7 @@ this.setData({
           title: '数据加载中...',
         });
         const res=await enterReq.login(phone,password)
+        wx.hideLoading();
         if(res.code===1){
  wx.showToast({
   title: '登录成功',
@@ -143,7 +144,7 @@ wx.setStorageSync('userInfo', {phone,role:res.data.role});
 app.globalData.userId=res.data.userId
 app.globalData.userInfo.role=res.data.role
 app.globalData.userInfo.phone=phone
-wx.hideLoading();
+
 // 跳转到首页
 wx.switchTab({ url: '/pages/home/home', });
         }

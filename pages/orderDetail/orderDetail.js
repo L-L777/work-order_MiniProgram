@@ -1,6 +1,7 @@
 // pages/orderDetail/orderDetail.js
 import { ordersReq } from "../../utils/api.js";
 import {dealTime} from "../../utils/dealTime.js"
+import {modal} from "../../utils/showModal.js"
 const app = getApp();
 Page({
 
@@ -96,35 +97,41 @@ Page({
   },
   // 删除工单按钮
   deleteOrder:async function(){
-    console.log(this.data.orderId);
-    const res = await ordersReq.deleteOrders(parseInt(this.data.orderId));
-    if(res.code===1){
-      wx.showToast({
-        title: res.msg,
-        icon: 'success',
-      });
-      wx.setStorageSync('needHomeRefreshOnReturn', true);
-      wx.switchTab({
-        url: '/pages/home/home',
-      })
+    // console.log(this.data.orderId);
+    const confirm=await modal.modalAlert('是否删除工单')
+    if(confirm){
+      const res = await ordersReq.deleteOrders(parseInt(this.data.orderId));
+      if(res.code===1){
+        wx.showToast({
+          title: res.msg,
+          icon: 'success',
+        });
+        wx.setStorageSync('needHomeRefreshOnReturn', true);
+        wx.switchTab({
+          url: '/pages/home/home',
+        })
+      }else{
+        wx.showToast({
+          title: res.msg,
+          icon: 'none',
+        });
+      }
     }else{
-      wx.showToast({
-        title: res.msg,
-        icon: 'none',
-      });
+      return
     }
+   
   },
   // 签到签退历史记录按钮
   signHistory:function(){
     wx.navigateTo({
-      url: '/pages/signHistory/signHistory',
+      url: '/pages/signHistory/signHistory?orderId='+this.data.orderId,
     })
   },
   // 签到签退按钮
   sign:function(e){
     const status=e.currentTarget.dataset.status
     wx.navigateTo({
-      url: '/pages/sign/sign?status=' + status,
+      url: '/pages/sign/sign?status=' + status+'&orderId='+this.data.orderId,
     })
   },
   // 施工状态按钮
@@ -135,52 +142,66 @@ Page({
    if(this.data.detailMessage.status!=='施工方未确认'){
      return;
    }
-   wx.showLoading({
-    title: '数据加载中...',
-  });
-   const res =await ordersReq.updateOrderStatus(this.data.orderId,"施工方确认未施工")
-   if(res.code===1){
-    wx.hideLoading();
-    this.setData({
-      detailMessage:{...this.data.detailMessage,status:"施工方确认未施工"}
-    })
-    wx.showToast({
-      title:'确认成功',
-      icon: 'success',
+   const confirm=await modal.modalAlert('是否确认工单')
+   if(confirm){
+    wx.showLoading({
+      title: '数据加载中...',
     });
-    
+     const res =await ordersReq.updateOrderStatus(this.data.orderId,"施工方确认未施工")
+     if(res.code===1){
+      wx.setStorageSync('needHomeRefreshOnReturn', true);
+      wx.hideLoading();
+      this.setData({
+        detailMessage:{...this.data.detailMessage,status:"施工方确认未施工"}
+      })
+      wx.showToast({
+        title:'确认成功',
+        icon: 'success',
+      });
+      
+     }else{
+      wx.hideLoading();
+      wx.showToast({
+        title: res.msg,
+        icon: 'none',
+      });
+     }
    }else{
-    wx.hideLoading();
-    wx.showToast({
-      title: res.msg,
-      icon: 'none',
-    });
+     return
    }
+   
   },
 
   // 结束工程按钮
   finish:async function(){
  
-    wx.showLoading({
-     title: '数据加载中...',
-   });
-    const res =await ordersReq.updateOrderStatus(this.data.orderId,"验收未通过")
-    if(res.code===1){
-     wx.hideLoading();
-     this.setData({
-       detailMessage:{...this.data.detailMessage,status:"验收未通过"}
-     })
-     wx.showToast({
-       title:'确认成功',
-       icon: 'success',
-     });
-     
+    const confirm=await modal.modalAlert('是否结束工程')
+    if(confirm){
+      wx.showLoading({
+        title: '数据加载中...',
+      });
+       const res =await ordersReq.updateOrderStatus(this.data.orderId,"验收未通过")
+       if(res.code===1){
+        wx.setStorageSync('needHomeRefreshOnReturn', true);
+        wx.hideLoading();
+        this.setData({
+          detailMessage:{...this.data.detailMessage,status:"验收未通过"}
+        })
+        wx.showToast({
+          title:'确认成功',
+          icon: 'success',
+        });
+        
+       }else{
+        wx.hideLoading();
+        wx.showToast({
+          title: res.msg,
+          icon: 'none',
+        });
+       }
     }else{
-     wx.hideLoading();
-     wx.showToast({
-       title: res.msg,
-       icon: 'none',
-     });
+      return
     }
+    
    },
 })

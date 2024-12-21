@@ -19,8 +19,8 @@
 <button class="detail_page_btn delete_btn" bind:tap="deleteOrder">删除工单</button>
 </view>
 <view wx:if="{{role==='WORKER'}}" class="conductor_btnbox">
-  <button class="detail_page_btn sign_btn" bind:tap="sign" data-status="1">签到</button>
-  <!-- <button class="detail_page_btn sign_btn" bind:tap="sign" data-status="0">签退</button> -->
+  <button wx:if="{{detailMessage.checkInOutStatus==='1'}}" class="detail_page_btn sign_btn" bind:tap="sign" data-status="1">签到</button>
+  <button wx:else class="detail_page_btn sign_btn" bind:tap="sign" data-status="0">签退</button>
 <button class="detail_page_btn finish_btn" bind:tap="finish" >结束工程</button>
 </view>
 <button wx:if="{{role==='EMPLOYEE'||role==='ADMIN'}}" class="detail_page_btn update_btn" bind:tap="updateOrder">修改工单</button>

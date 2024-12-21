@@ -7,12 +7,14 @@
 <view>时间：2024-12-31 20:00:00</view>
 <view>地点：广东工业大学</view>
 <button class="sign_detail" bind:tap="signHistory">详情</button>
+<button wx:if="{{role==='ADMIN'}}" class="sign_update" data-status="1" bind:tap="signUpdate">修改</button>
 </view>
 <view class="signout_box">
   <view>签退</view>
 <view>时间：2024-12-31 20:00:00</view>
 <view>地点：广东工业大学</view>
 <button class="sign_detail" bind:tap="signHistory">详情</button>
+<button wx:if="{{role==='ADMIN'}}" class="sign_update" data-status="0" bind:tap="signUpdate">修改</button>
 </view>
 </view>
 <view class="history_card">
@@ -21,12 +23,14 @@
 <view>时间：2024-12-31 20:00:00</view>
 <view>地点：广东工业大学</view>
 <button class="sign_detail" bind:tap="signHistory">详情</button>
+<button wx:if="{{role==='ADMIN'}}" class="sign_update" bind:tap="signUpdate">修改</button>
 </view>
 <view class="signout_box">
   <view>签退</view>
 <view>时间：2024-12-31 20:00:00</view>
 <view>地点：广东工业大学</view>
 <button class="sign_detail" bind:tap="signHistory">详情</button>
+<button wx:if="{{role==='ADMIN'}}" class="sign_update" bind:tap="signUpdate">修改</button>
 </view>
 </view>
 <view class="history_card">
@@ -35,12 +39,14 @@
 <view>时间：2024-12-31 20:00:00</view>
 <view>地点：广东工业大学</view>
 <button class="sign_detail" bind:tap="signHistory">详情</button>
+<button wx:if="{{role==='ADMIN'}}" class="sign_update" bind:tap="signUpdate">修改</button>
 </view>
 <view class="signout_box">
   <view>签退</view>
 <view>时间：2024-12-31 20:00:00</view>
 <view>地点：广东工业大学</view>
 <button class="sign_detail" bind:tap="signHistory">详情</button>
+<button wx:if="{{role==='ADMIN'}}" class="sign_update" bind:tap="signUpdate">修改</button>
 </view>
 </view>
 

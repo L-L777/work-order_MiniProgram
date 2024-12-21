@@ -8,7 +8,7 @@
 </view>
 
 <!-- 搜索框 -->
-<view wx:if="{{role === 'EMPLOYEE' || role === 'ADMIN'}}" style="position: fixed;top:{{navBarHeight+90}}rpx;  width: 100vw; height: 100rpx; background-color: white; z-index: 5000;">
+<view  style="position: fixed;top:{{role === 'EMPLOYEE' || role === 'ADMIN' ? navBarHeight + 90 : navBarHeight }}rpx;  width: 100vw; height: 100rpx; background-color: white; z-index: 5000;">
   <van-search
 value="{{ searchValue }}"
 placeholder="请输入搜索关键词"

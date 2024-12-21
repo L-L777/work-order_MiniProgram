@@ -6,6 +6,12 @@
   height="400rpx"
   lazy-load
   src="{{imgSrc}}"
-/>
+  use-loading-slot
+  use-error-slot
+  bind:click="onImageClick"
+>
+<van-loading slot="loading" type="spinner" size="20" vertical />
+<text slot="error">加载失败</text>
+</van-image>
 <button class="check_btn" bind:tap="check">验收工单</button>
 </view>

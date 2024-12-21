@@ -3,24 +3,38 @@
 <view class="sign_in_out_page" style="padding-top:{{navBarHeight}}rpx;  position: relative; width: 100vw;">
 <view class="sign_in_out_card">
 <view class="text_box">
-  <form  bindsubmit="signSubmit">
-  <van-cell-group>
-  <van-field
+  <form  bindsubmit="signSubmit" class="sign_form">
+
+  <!-- <van-field
     name="progress"
+    custom-class="custom-sign-input"
     label="工程进度："
     placeholder="请输入工程进度"
-    custom-class="custom-sign-input"
+    
     required
-  />
-  <van-field
+  /> -->
+  <!-- <van-field
+  type="textarea"
     name="description"
     label="描述："
     placeholder="请输入工程描述"
-    type="textarea"
     autosize
     custom-class="custom-sign-input"
     required
-  />
+  /> -->
+  <view class="textarea-box">
+          <label class="label">描述：</label>
+          <textarea
+          class="custom-sign-input"
+            class="textarea"
+            placeholder="点击输入工程描述:(最多1000字)"
+            auto-height="{{true}}"
+            fixed="{{false}}"
+            maxlength="1000"
+            required
+            bindinput="onDescriptionInput"
+          />
+        </view>
   <view class="uploader_box">
     <van-uploader
   deletable
@@ -32,8 +46,6 @@
 />
 
   </view>
-  
-</van-cell-group>
 <button formType="submit" class="sign-submit-btn"> 提交</button>
 </form>
 </view>

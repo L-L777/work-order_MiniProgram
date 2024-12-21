@@ -46,7 +46,7 @@ page{
 /* 工单盒子 */
 .orders_box{
   width: 100vw;
-  margin-top: 10rpx;
+  margin-top: 110rpx;
 }
 .every_box{
   display: flex;

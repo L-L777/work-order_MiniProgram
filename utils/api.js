@@ -77,5 +77,26 @@ const ordersReq={
     }
     return $http.put('/orders/status',data)
   },
+  // 签到签退（施工方）
+  sign:(orderId,latitude,longitude,signType,textInfo,images)=>{
+    const data={
+      orderId,latitude,longitude,signType,textInfo,images
+    }
+    return $http.post('/orders/sign',data)
+  },
+  // 查看工单签到签退信息（管理员/员工/施工方）
+  getSignDetail:(orderId)=>{
+    const params={
+      orderId
+    }
+    return $http.get('/orders/sign',params)
+  },
+  // 修改签到签退详情（管理员）
+  updateSignDetail:(id,orderId,textInfo,images)=>{
+    const data={
+      id,orderId,textInfo,images
+    }
+    return $http.put('/orders/sign',data)
+  },
 }
 module.exports={enterReq,ordersReq}
