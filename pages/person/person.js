@@ -12,7 +12,12 @@ Page({
     passwordShow:false,//修改密码弹出窗显示状态
   },
 onLoad(){
-this.setData({phone:app.globalData.userInfo.phone})
+   // 判断有无token
+   if(app.judgeToken())
+   {
+    this.setData({phone:app.globalData.userInfo.phone})
+   }
+
 },
 // 退出登录
   loginout:()=>{

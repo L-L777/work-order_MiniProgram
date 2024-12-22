@@ -35,9 +35,14 @@ Page({
     });
   },
   onLoad() {
-    this.setData({role:app.globalData.userInfo.role})
-    // console.log(this.data.role);
-    this.fetchOrders();
+    // 判断有无token
+    if(app.judgeToken())
+    {
+      this.setData({role:app.globalData.userInfo.role})
+      // console.log(this.data.role);
+      this.fetchOrders();
+    }
+   
   },
   onShow: function () {
     // 检查是否有需要刷新的标记

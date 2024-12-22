@@ -68,6 +68,26 @@
   </view>
 </van-popup>
 
+<!-- 修改施工状态弹窗 -->
+<van-popup
+  show="{{ statusShow}}"
+  round
+  position="bottom"
+  custom-style="height: 50%"
+  z-index='1000'
+  bind:close="onStatusClose"
+  lock-scroll
+  root-portal
+>
+<van-picker
+  columns="{{ columns }}"
+  bind:change="onStatusChange"
+  show-toolbar
+  bind:cancel="onStatusClose"
+  bind:confirm="onStatusConfirm"
+/>
+</van-popup>
+
 <!-- 查看工单信息弹窗 -->
 <van-popup
   show="{{ detailShow }}"

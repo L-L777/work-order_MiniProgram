@@ -1,5 +1,6 @@
 // components/pop/pop.js
 import { ordersReq,privateReq } from "../../utils/api.js";
+import {modal} from "../../utils/showModal.js"
 Component({
 
   /**
@@ -10,6 +11,9 @@ Component({
       type:Boolean
     },
     detailShow:{
+      type:Boolean
+    },
+    statusShow:{
       type:Boolean
     },
     signShow:{
@@ -39,6 +43,9 @@ Component({
  employeePhone: '',
  constructionName: '',
  constructionPhone: '',
+//  修改施工状态选择器
+columns:["施工方未确认","施工方确认未施工","施工中","验收未通过","验收通过"],
+statusValue:'施工方未确认',
   },
 
   /**
@@ -59,6 +66,11 @@ messageSubmit:function(){
 onDetailClose:function(){
   // 调用自定义方法，发送数据到父组件
   this.triggerEvent('closeDetail', { data: '关闭弹窗' });
+ },
+// 关闭修改施工状态弹窗
+onStatusClose:function(){
+  // 调用自定义方法，发送数据到父组件
+  this.triggerEvent('closeStatus', { data: '关闭弹窗' });
  },
  // 关闭查看历史签到签退信息弹窗
  onSignClose:function(){
@@ -144,7 +156,42 @@ else{
     
    },
 
+  //  施工状态选择器值变化
+  onStatusChange:function(e){
+    const { value } = e.detail;
+    // console.log(value);
+    this.setData({statusValue:value})
+   },
+  //  施工状态确认修改
+  onStatusConfirm:async function(){
+    const confirm=await modal.modalAlert("您确认修改当前状态吗")
+    if(confirm){
+      wx.showLoading({
+        title: '数据加载中...',
+      });
+      const res=await ordersReq.updateOrderStatus(this.data.orderId,this.data.statusValue)
+      wx.hideLoading();
+      if(res.code===1){
+        wx.showToast({
+          title: '修改成功',
+          icon: 'success',
+        });
+        this.triggerEvent('closeStatus', { status: this.data.statusValue });
+      }else{
+        wx.showToast({
+          title: res.msg,
+          icon: 'none',
+        });
+      }
+    }else{
+      return
+    }
+    
+   
+    
+   },
   },
+
 
   lifetimes: {
     // 组件实例被挂载到页面节点树中时执行

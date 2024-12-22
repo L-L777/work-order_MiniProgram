@@ -1,7 +1,7 @@
 import axios from './axios.js';
 import handleErrors from "./handleError.js"
 const $http = new axios({
-  baseUrl: 'http://117.72.95.156:6100/api' // 设置请求根路径
+  baseUrl: 'http://117.72.95.156:8082/api' // 设置请求根路径
 });
 wx.$http = $http; // 将$http实例挂载到wx对象上，方便全局访问
 // 请求开始之前做一些事情
@@ -15,11 +15,12 @@ $http.beforeRequest = function(options) {
 };
 let isRefreshing = false;
 let requestQueue=[];
-
+let refreshCount=0
+let Max_refresh=10;
 // 请求完成之后做一些事情
 $http.afterRequest = async function(res, resolve, reject) {
   // console.log('isRefreshing', isRefreshing);
-  if (res.statusCode === 401 && !isRefreshing) {
+  if (res.statusCode === 401 && !isRefreshing&&refreshCount<=Max_refresh) {
     console.log('endRequest', res);
     const config = res.config;
     requestQueue.push(config);
@@ -34,19 +35,28 @@ $http.afterRequest = async function(res, resolve, reject) {
       isRefreshing = true;
       try {
         const response = await wx.$http.get('/user/refreshToken', {}, { refreshToken });
-        console.log(response.data.accessToken);
-        wx.setStorageSync('accessToken', response.data.accessToken);
-        wx.setStorageSync('refreshToken', response.data.refreshToken);
-        console.log(111);
-        // 重试队列中的请求
-        retryQueue();
+        if(response.code===1){
+          refreshCount++
+          console.log(response.data.accessToken);
+          wx.setStorageSync('accessToken', response.data.accessToken);
+          wx.setStorageSync('refreshToken', response.data.refreshToken);
+          console.log(111);
+          // 重试队列中的请求
+          retryQueue();
+        }else{
+          handleLoginExpired() ;
+        }
         isRefreshing = false;
       } catch (err) {
         handleLoginExpired();
         isRefreshing = false;
       }
     }
-  } else {
+  } else if(res.statusCode === 401&&refreshCount>Max_refresh ){
+    // 如果一直刷新token后，获取到的token万一还是过期的，直接退出登录
+    handleLoginExpired();
+  }
+  else {
     // 正常处理响应
     if (res.statusCode === 200) {
       resolve(res.data);
@@ -72,7 +82,7 @@ $http.afterRequest = async function(res, resolve, reject) {
 
   async function retryQueue() {
     while (requestQueue.length > 0) {
-      console.log(requestQueue[0]);
+      // console.log(requestQueue[0]);
       const queuedRequest = requestQueue.shift();
       sendRequest(queuedRequest);
     }
@@ -80,7 +90,7 @@ $http.afterRequest = async function(res, resolve, reject) {
 
   async function sendRequest(requestConfig) {
     Object.assign($http,requestConfig)
-    console.log($http);
+    // console.log($http);
     $http._sendRequest()
       .then((response) => {
         // console.log(response);

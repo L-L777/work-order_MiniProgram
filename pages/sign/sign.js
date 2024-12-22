@@ -24,6 +24,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+     // 判断有无token
+   if(app.judgeToken())
+   {
     // console.log(options);
     this.setData({status:parseInt(options.status),  role: app.globalData.userInfo.role,orderId:options.orderId})
     if(options.status==='1'){
@@ -31,6 +34,8 @@ Page({
     }else{
       this.setData({title:'签退'})
     }
+   }
+    
 
   },
   onDescriptionInput(e) {

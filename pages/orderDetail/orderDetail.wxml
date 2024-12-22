@@ -4,6 +4,7 @@
 <view class="detail_page" style="padding-top:{{navBarHeight}}rpx;  position: relative; width: 100vw;">
 <!-- 引入web-view组件 -->
 <!-- <web-view src="{{fileLink1}}"></web-view> -->
+<!-- 工单信息 -->
 <view class="detail_card">
 <view class="detail_title">工单信息</view>
   <view class="detail_box"> 
@@ -22,6 +23,8 @@
 <view class="detail_msg"><label>验收时间：</label><text>{{detailMessage.acceptanceTime}}</text></view>
 </view>
 </view>
+
+<!-- 按钮 -->
 <view class=".file_btnbox">
   <button class="detail_page_btn file_btn" data-src="{{fileLink1}}" bind:tap="fileCheck">查看附件一</button>
 <button class="detail_page_btn file_btn" data-src="{{fileLink2}}" bind:tap="fileCheck">查看附件二</button>
@@ -35,6 +38,8 @@
   <button wx:else class="detail_page_btn sign_btn" bind:tap="sign" data-status="0">签退</button>
 <button class="detail_page_btn finish_btn" bind:tap="finish" >结束工程</button>
 </view>
+<button wx:if="{{role==='ADMIN'}}" class="detail_page_btn update_status_btn" bind:tap="updateStatus">修改施工状态</button>
+
 <button wx:if="{{role==='EMPLOYEE'||role==='ADMIN'}}" class="detail_page_btn update_btn" bind:tap="updateOrder">修改工单</button>
 <button class="detail_page_btn status_btn " bind:tap="confirm">施工状态：{{detailMessage.status}}</button>
 <!-- <button class="detail_page_btn check_btn" bind:tap="detailOrder">查看工单信息</button> -->
@@ -44,4 +49,4 @@
 </view>
 
 <!-- 修改工单和工单信息弹出框 -->
-<pop wx:if="{{updateShow||detailShow}}" createShow='{{updateShow}}' detailShow='{{detailShow}}' detailMessage='{{detailMessage}}' bind:closeCreate="onClose" bind:closeDetail="onClose"></pop>
+<pop wx:if="{{updateShow||detailShow||statusShow}}" createShow='{{updateShow}}' detailShow='{{detailShow}}' statusShow="{{statusShow}}" orderId="{{orderId}}" detailMessage='{{detailMessage}}' bind:closeCreate="onClose" bind:closeDetail="onClose" bind:closeStatus="onClose"></pop>

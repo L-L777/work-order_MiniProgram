@@ -19,7 +19,21 @@ onLaunch(){
   });
   
 },
-
+// 判断当前页面本地是否存在token，若无token则退回登录页面
+judgeToken(){
+if(!wx.getStorageSync('accessToken')){
+wx.reLaunch({
+  url: '/pages/index/index',
+})
+wx.showToast({
+  title: '请先登录',
+  icon:'error'
+})
+return false
+}else{
+  return true
+}
+},
   globalData: {
     userId:null,
     userInfo:{},//用户信息

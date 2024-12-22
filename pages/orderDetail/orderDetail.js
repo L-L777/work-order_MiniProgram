@@ -14,15 +14,21 @@ Page({
     userId: app.globalData.userId,
     updateShow:false,//修改工单弹出框状态
     detailShow:false,//工单信息弹出框状态
+    statusShow:false,//修改施工状态弹出框状态
     orderId:0,
     detailMessage:{},
     fileLink1:'',//文件连接
     fileLink2:'',//文件连接
   },
   onLoad(option) {
-    this.setData({ orderId: option.id ,role: app.globalData.userInfo.role}, () => {
-      this.fetchDetail(option.id,this);
-    });
+    // 判断有无token
+    if(app.judgeToken())
+ {
+  this.setData({ orderId: option.id ,role: app.globalData.userInfo.role}, () => {
+    this.fetchDetail(option.id,this);
+  });
+ }
+   
   },
   onShow: function () {
     // 检查是否有需要刷新的标记
@@ -80,12 +86,21 @@ Page({
     })
   },
 // 关闭弹窗
-  onClose:function(){
-    this.setData({ updateShow: false,detailShow:false });
+  onClose:function(e){
+    // console.log(e);
+    if(e.detail.status&&e.detail.status!==this.data.detailMessage.status){
+this.setData({detailMessage:{...this.data.detailMessage,status:e.detail.status}})
+wx.setStorageSync('needHomeRefreshOnReturn', true);
+    }
+    this.setData({ updateShow: false,detailShow:false,statusShow:false });
   },
   // 修改工单按钮
   updateOrder:function(){
     this.setData({ updateShow: true });
+  },
+  // 修改施工状态按钮
+  updateStatus:function(){
+    this.setData({ statusShow: true });
   },
   // 工单信息按钮
   detailOrder:function(){

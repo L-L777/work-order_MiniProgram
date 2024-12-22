@@ -56,6 +56,9 @@ word-wrap: break-word; /* 允许在单词内换行 */
 .update_btn{
     background-color: #6633CC;
     }
+.update_status_btn{
+  background: linear-gradient(135deg, #FF00CC, #CC33FF);
+}
 .status_btn{
   font-size: 14px;
   background-color: #0033CC;

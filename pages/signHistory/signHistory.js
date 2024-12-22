@@ -16,9 +16,14 @@ Page({
     },
 
   onLoad(options){
-this.setData({orderId:options.orderId},()=>{
-  this.fetchHistory()
-})
+     // 判断有无token
+   if(app.judgeToken())
+   {
+    this.setData({orderId:options.orderId},()=>{
+      this.fetchHistory()
+    })
+   }
+
   },
   fetchHistory: async function(){
 const res=await ordersReq.getSignDetail(this.data.orderId)
