@@ -38,10 +38,11 @@
     <van-uploader
   deletable
   multiple
+  preview-image
   file-list="{{fileList}}"
   bind:delete="onDelete"
   bind:after-read="onAfterRead"
-  catchtap="previewImage"
+  
 />
 
   </view>

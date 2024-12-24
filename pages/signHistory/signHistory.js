@@ -20,7 +20,7 @@ Page({
      // 判断有无token
    if(app.judgeToken())
    {
-    this.setData({orderId:options.orderId},()=>{
+    this.setData({orderId:options.orderId,role:app.globalData.userInfo.role},()=>{
       this.fetchHistory()
     })
    }
