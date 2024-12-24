@@ -38,6 +38,7 @@
     <van-uploader
   deletable
   multiple
+  max-count="9"
   preview-image
   file-list="{{fileList}}"
   bind:delete="onDelete"

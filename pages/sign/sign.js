@@ -62,10 +62,21 @@ Page({
   onAfterRead(event) {
     // 文件读取完成后的回调，通常用于上传文件
     const { file } = event.detail;
+    console.log(file);
+    // console.log(event.detail);
     // 上传文件的逻辑...
     // 假设上传成功后，服务器返回的文件链接保存在 file.url 中
-    const newFileList = this.data.fileList.concat({ ...file[0] });
-    this.setData({ fileList: newFileList });
+    // const newFileList = this.data.fileList.concat({ ...file[0] });
+    const newFileList=[...this.data.fileList]
+    if (Array.isArray(file) && file.length) {
+      file.forEach(item => {
+        // 对每个文件执行上传操作
+    newFileList.push(item)
+      });
+    }
+    
+   
+    this.setData({ fileList: [...newFileList ]});
   },
   previewImage(event) {
     // 获取所有图片的链接，用于预览
