@@ -44,3 +44,9 @@
 .sign_update{
   right: 150rpx;
 }
+
+.empty_sign{
+  margin-top: 50rpx;
+  color: #666666;
+  font-size: 16px;
+}

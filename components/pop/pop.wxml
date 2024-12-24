@@ -129,11 +129,13 @@
   lock-scroll 
   root-portal
 >
+
 <view class="sign_box"> 
   <view class="sign_msg">{{'第'+signDetail.signCount+'次'}}{{signDetail.signType==='1'?'签到:':'签退:'}}</view>
   <view class="sign_msg">签到时间：<text>{{signDetail.signTime}}</text></view>
   <view wx:if="{{signDetail.updateTime}}" class="sign_msg">详情更新时间：<text>{{signDetail.updateTime}}</text></view>
-  <view class="sign_msg">经度：<text>{{signDetail.longitude}}</text>纬度：<text>{{signDetail.latitude}}</text></view>
+  <view class="sign_msg">经度：<text>{{signDetail.longitude}}</text></view>
+  <view class="sign_msg">纬度：<text>{{signDetail.latitude}}</text></view>
   <view class="sign_description">
   <label>描述：</label><view class="description_content">{{signDetail.textInfo}}</view>
   </view>

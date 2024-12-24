@@ -1,7 +1,7 @@
 <!--pages/signHistory/signHistory.wxml-->
 <navBar name="历史签到签退记录" leftStatus='true'></navBar>
 <view class="history_page" style="padding-top:{{navBarHeight}}rpx;  position: relative; width: 100vw;">
-
+  <view wx:if="{{signHistory.length===0}}" class="empty_sign">暂无签到签退数据</view>
 <block wx:for="{{signHistory}}" wx:key="index"> 
   <view class="history_card" >
 <view class="signin_box">
