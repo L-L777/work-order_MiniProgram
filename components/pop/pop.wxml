@@ -130,53 +130,31 @@
   root-portal
 >
 <view class="sign_box"> 
-  <view class="sign_msg">签到：</view>
-  <view class="sign_msg">时间：<text>2024-01-31 22:00:00</text></view>
-  <view class="sign_msg">地点：<text>南方电网湛江局</text></view>
+  <view class="sign_msg">{{'第'+signDetail.signCount+'次'}}{{signDetail.signType==='1'?'签到:':'签退:'}}</view>
+  <view class="sign_msg">签到时间：<text>{{signDetail.signTime}}</text></view>
+  <view wx:if="{{signDetail.updateTime}}" class="sign_msg">详情更新时间：<text>{{signDetail.updateTime}}</text></view>
+  <view class="sign_msg">经度：<text>{{signDetail.longitude}}</text>纬度：<text>{{signDetail.latitude}}</text></view>
   <view class="sign_description">
-  <label>描述：</label><view class="description_content">南方电网湛江局</view>
+  <label>描述：</label><view class="description_content">{{signDetail.textInfo}}</view>
   </view>
-  <view class="sign_img_box">
+  <view class="sign_img_box" >
+  <block wx:for="{{signDetail.images}}" wx:key="index">
     <van-image
   width="180rpx"
   height="180rpx"
   lazy-load
+  show-loading
+  show-error
   radius='5px'
   custom-class="sign_img"
   bind:click="previewImg"
-  data-src="https://web-test999.oss-cn-hangzhou.aliyuncs.com/login-background.png"
-  src="https://web-test999.oss-cn-hangzhou.aliyuncs.com/login-background.png"
+  data-src="{{item}}"
+  src="{{item}}"
+  loading-class="sign_img_loading"
 />
-    <van-image
-  width="180rpx"
-  height="180rpx"
-  lazy-load
-  radius='5px'
-  custom-class="sign_img"
-  bind:click="previewImg"
-  data-src="https://web-test999.oss-cn-hangzhou.aliyuncs.com/login-background.png"
-  src="https://web-test999.oss-cn-hangzhou.aliyuncs.com/login-background.png"
-/>
-    <van-image
-  width="180rpx"
-  height="180rpx"
-  lazy-load
-  radius='5px'
-  custom-class="sign_img"
-  bind:click="previewImg"
-  data-src="https://web-test999.oss-cn-hangzhou.aliyuncs.com/login-background.png"
-  src="https://web-test999.oss-cn-hangzhou.aliyuncs.com/login-background.png"
-/>
-    <van-image
-  width="180rpx"
-  height="180rpx"
-  lazy-load
-  radius='5px'
-  custom-class="sign_img"
-  bind:click="previewImg"
-  data-src="https://web-test999.oss-cn-hangzhou.aliyuncs.com/login-background.png"
-  src="https://web-test999.oss-cn-hangzhou.aliyuncs.com/login-background.png"
-/>
+  </block>
+    
+  
   </view>
 </view>
 </van-popup>

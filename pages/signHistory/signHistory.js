@@ -12,7 +12,8 @@ Page({
     userId: app.globalData.userId,
     signShow:false,//历史签到签退信息弹出框状态
     orderId:0,
-    signDetail:[]
+    signHistory:[],
+    signDetail:{},
     },
 
   onLoad(options){
@@ -25,11 +26,22 @@ Page({
    }
 
   },
+  onShow(){
+    if (wx.getStorageSync('needSignHistoryRefreshOnReturn')) {
+      // 执行刷新操作，例如重新加载数据
+      this.setData({ signHistory:[]},()=>{
+        this.fetchHistory()
+      })
+     
+      // 清除标记
+      wx.removeStorageSync('needSignHistoryRefreshOnReturn');
+    }
+  },
   fetchHistory: async function(){
 const res=await ordersReq.getSignDetail(this.data.orderId)
 if(res.code===1){
-this.setData({signDetail:[...res.data]})
-console.log(res.data);
+this.setData({signHistory:[...res.data]})
+// console.log(res.data);
 }else{
   wx.showToast({
     title: res.msg,
@@ -42,15 +54,17 @@ console.log(res.data);
     this.setData({ signShow:false });
   },
   // 详情按钮
-  signHistory:function(){
-    this.setData({ signShow: true });
+  signHistory:function(e){
+    // console.log(e.currentTarget.dataset);
+    this.setData({ signShow: true,signDetail:e.currentTarget.dataset.detail });
   },
   // 修改按钮
   signUpdate:function(e){
     const status=e.currentTarget.dataset.status
-console.log(status);
+    const detail=JSON.stringify(e.currentTarget.dataset.detail)
+// console.log(status);
     wx.navigateTo({
-      url: '/pages/sign/sign?status='+status,
+      url: '/pages/sign/sign?status='+status+'&signDetail='+detail,
     })
   }
 })

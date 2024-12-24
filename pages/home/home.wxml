@@ -14,7 +14,7 @@ value="{{ searchValue }}"
 placeholder="请输入搜索关键词"
 show-action
 bind:search="onSearch"
-bind:cancel="onCancel"
+bind:cancel="onSearchCancel"
 custom-class="search_class"
 />
 </view>
@@ -22,19 +22,33 @@ custom-class="search_class"
 <!-- 工单 -->
 <!-- 滑动到第十张卡片时获取下一页数据 一张卡片高300rpx margin-top:20rpx -->
 <view
-
- class="orders_box {{role === 'EMPLOYEE' || role === 'ADMIN' ? 'worker ' : ''}}"
- enablePullDownRefresh
+style="padding-top:{{role === 'EMPLOYEE' || role === 'ADMIN' ? 210 : 110 }}rpx; padding-bottom:{{tabBarHeight}}rpx;width: 100vw; height:calc(100vh - {{navBarHeight+(role === 'EMPLOYEE' || role === 'ADMIN' ? 210 : 110) + tabBarHeight}}rpx);position: fixed; "
+ 
  >
+ <scroll-view 
+ enableFlex
+ enablePullDownRefresh
+ refresher-enabled
+ refresher-triggered="{{refresh}}"
+    bind:refresherrefresh="onRefresh"
+    style="height: 100%;  display: flex; flex-direction: column; align-items: center;"
+    refresher-default-style="none"
+  refresher-default-icon="none"
+  refresher-triggered-icon="none"
+    scroll-y
+    paging-enabled
+    bind:scrolltolower="onLoadMore">
   <block  wx:for="{{orderList}}" wx:key="id">
     <ordersCard order="{{item}}" btnshow='detail'></ordersCard>
   </block>
   <!-- <ordersCard  btnshow='detail'> </ordersCard>
   <ordersCard  btnshow='detail'> </ordersCard>
   <ordersCard  btnshow='detail'> </ordersCard> -->
-  <view wx:if="{{pageLoading}}" class="loading">
+  <view wx:if="{{pageLoading&&refresh}}" class="loading" >
     <van-loading type="spinner" color="#1989fa" />
   </view>
+ </scroll-view>
+ 
  
 
 </view>

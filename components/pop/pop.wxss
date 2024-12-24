@@ -60,6 +60,23 @@ border-bottom: 1px solid #EEEEEE;
     margin-top: 20rpx;
     margin-left: 20rpx;
   }
+  .sign_img_loading {
+    width: 180rpx;
+    height: 180rpx;
+    border-radius: 5px;
+    background-color: transparent; /* 灰色背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+
 
   /* 修改密码弹窗 */
   .update_password_box{

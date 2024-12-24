@@ -48,7 +48,7 @@ Page({
     // 检查是否有需要刷新的标记
     if (wx.getStorageSync('needHomeRefreshOnReturn')) {
       // 执行刷新操作，例如重新加载数据
-      this.setData({ allSelectActive: true, selectKey: '0', page:1,hasMore: true,length:0,orderList: [] }, () => {
+      this.setData({ allSelectActive: true, selectKey: '0', page:1,hasMore: true,length:0,orderList: [], }, () => {
         this.fetchOrders();
       });
       // 清除标记
@@ -62,9 +62,10 @@ Page({
     if(app.globalData.userInfo.role!=="WORKER"){
       key = this.data.selectKey;
     }
-    const res = await ordersReq.getOrders( this.data.page,this.data.pageSize,key);
+    const res = await ordersReq.getOrders( this.data.page,this.data.pageSize,key,this.data.searchValue);
     if (res.code === 1) 
     {
+      // console.log(res.data);
       this.setData({ orderList: [...this.data.orderList, ...res.data.workOrderList],total:res.data.total,length:this.data.length+res.data.workOrderList.length});
       if(res.data.total>this.data.page*this.data.pageSize){
         this.setData({hasMore:true});
@@ -79,8 +80,21 @@ Page({
     }
     this.setData({pageLoading:false, refresh:false,})
   },
+  // 搜索
+  onSearch(e) {  
+    // console.log(e.detail);  
+this.setData({page:1,hasMore: true,length:0,orderList: [],searchValue:e.detail},()=>{
+  this.fetchOrders();
+})
+  },
+  // 取消搜索
+  onSearchCancel() {    
+   this.setData({page:1,hasMore: true,length:0,orderList: [],searchValue:''},()=>{
+    this.fetchOrders();
+   })
+  },
   // 滑动分页加载
-  onReachBottom() {    
+  onLoadMore() {    
     // console.log(111);
     if (this.data.hasMore) {
       this.setData({page:this.data.page+1 },() => {
@@ -89,7 +103,7 @@ Page({
     }
   },
     // 下拉刷新事件处理函数
-    onPullDownRefresh() {
+    onRefresh() {
       this.setData({
         orderList: [],
         pageLoading: true,

@@ -18,6 +18,7 @@ Page({
     latitude:0,//纬度
     longitude:0,//经度
     orderId:'0',  
+    signDetail:{},
   },
 
   /**
@@ -33,6 +34,15 @@ Page({
       this.setData({title:'签到'})
     }else{
       this.setData({title:'签退'})
+    }
+
+    if(options.signDetail){
+      const detail=JSON.parse(options.signDetail)
+      const img=[]
+      detail.images.map((item)=>{
+        img.push({tempFilePath:item,url:item,status:0})
+      })
+      this.setData({signDetail:detail,description:detail.textInfo,fileList:[...img]})
     }
    }
     
@@ -85,64 +95,133 @@ Page({
       });
       return; // 终止执行
     }
-     // console.log(fileList);
     const confirm=await modal.modalAlert("是否进行次操作")
     if(confirm){
       wx.showLoading({
-        title: '数据加载中...',
+        title: '图片上传中...',
       });
-    // 获取定位
-    wx.getLocation({
-      type: 'gcj02',
-      success(res){
-        const latitude = res.latitude;
-        const longitude = res.longitude;
-        that.setData({
-          latitude,
-          longitude
-        });
-        // console.log(latitude);
-        // 使用 Promise 链式调用
-        ordersReq.sign(that.data.orderId,latitude,longitude,that.data.status,description,fileList)
-          .then(res => {
-            wx.hideLoading();
-            if(res.code===1){
+        // 上传图片的Promise数组
+      const uploadPromises = this.data.fileList.filter(file => file.status !== 0) .map(file => {
+        // console.log(file);
+        return new Promise((resolve, reject) => {
+          wx.uploadFile({
+            url: 'http://117.72.95.156:6100/api/orders/signImage', // 你的服务器上传图片的接口
+            filePath: file.tempFilePath, // 要上传文件资源的路径
+            name: 'image', // 必填，后台用来解析文件的key
+            header: {
+              'Content-Type': 'multipart/form-data' ,
+            },
+            formData: {
+              'image': file,
+            },
+            success: (res) => {
+              // 上传成功的处理
+              if (res.statusCode === 200) {
+                const fileUrl =JSON.parse(res.data).data.imagePath;
+                resolve(fileUrl);
+              } else {
+                wx.showToast({
+                  title: '图片上传失败',
+                  icon:'error'
+                })
+                reject(new Error('图片上传失败'));
+              }  
+            },
+            fail: (err) => {
               wx.showToast({
-                title: res.msg,
-                icon: 'success',
-              });
-              wx.setStorageSync('needDetailRefreshOnReturn', true);
-              wx.navigateBack({
-                delta:1
+                title: '图片上传失败',
+                icon:'error'
               })
-            }else{
-             
-              wx.showToast({
-                title: res.msg,
-                icon: 'none',
-              });
+              wx.hideLoading();
+              reject(err);
             }
-          })
-          .catch(err => {
-            wx.hideLoading();
-            wx.showToast({
-              title: '请求失败',
-              icon: 'error',
-            });
           });
-      },
-      fail(err) {
-        console.error('定位失败', err);
-        // 提示用户定位失败
-        wx.showToast({
-          title: '定位失败，请检查权限设置',
-          icon: 'none'
         });
-      }
+      });
+      const fileUrls = await Promise.all(uploadPromises);
+      this.data.fileList.filter(file => file.status === 0).map((item)=>{
+        fileUrls.push(item.url)
+      })
+      wx.hideLoading();
+      // console.log('所有图片上传成功', fileUrls);
+    wx.showLoading({
+      title: '数据提交中...',
+    });
+    if(that.data.role==="WORKER"){
+ // 获取定位
+ wx.getLocation({
+  type: 'gcj02',
+  success(res){
+    const latitude = res.latitude;
+    const longitude = res.longitude;
+    that.setData({
+      latitude,
+      longitude
+    });
+    // console.log(latitude);
+    // 使用 Promise 链式调用
+    console.log(fileUrls);
+    ordersReq.sign(that.data.orderId,latitude,longitude,that.data.status,description,fileUrls)
+      .then(res => {
+        wx.hideLoading();
+        if(res.code===1){
+          wx.showToast({
+            title: res.msg,
+            icon: 'success',
+          });
+          wx.setStorageSync('needDetailRefreshOnReturn', true);
+          wx.navigateBack({
+            delta:1
+          })
+        }else{
+         
+          wx.showToast({
+            title: res.msg,
+            icon: 'none',
+          });
+        }
+      })
+      .catch(err => {
+        wx.hideLoading();
+        wx.showToast({
+          title: '请求失败',
+          icon: 'error',
+        });
+      });
+  },
+  fail(err) {
+    console.error('定位失败', err);
+    // 提示用户定位失败
+    wx.showToast({
+      title: '定位失败，请检查权限设置',
+      icon: 'none'
+    });
+  }
+})
+}else{
+  const res=await ordersReq.updateSignDetail(that.data.signDetail.id,that.data.signDetail.orderId,that.data.description,fileUrls )
+  wx.hideLoading();
+  if(res.code===1){
+    wx.setStorageSync('needSignHistoryRefreshOnReturn', true);
+    wx.navigateBack({
+      delta:1
     })
+    wx.showToast({
+      title: '更新成功',
+      icon:'success'
+    })
+
+  }else{
+    wx.showToast({
+      title: res.msg,
+      icon:'none'
+    })
+  }
+}
     }else{
       return
     }
+   
   
   }
 })

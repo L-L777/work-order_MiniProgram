@@ -6,7 +6,7 @@ onLaunch(){
   const screenWidth=windowInfo.screenWidth
   this.globalData.navBarHeight = statusBarHeight*750/screenWidth + 80;
   // console.log(statusBarHeight*750/screenWidth + 80);
-  this.globalData.tabBarHeight=statusBarHeight*750/screenWidth + 80;
+  this.globalData.tabBarHeight=statusBarHeight*750/screenWidth + 50;
    // 异步获取用户权限
    wx.getStorage({
     key: 'userInfo',

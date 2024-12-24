@@ -1,56 +1,27 @@
 <!--pages/signHistory/signHistory.wxml-->
 <navBar name="历史签到签退记录" leftStatus='true'></navBar>
 <view class="history_page" style="padding-top:{{navBarHeight}}rpx;  position: relative; width: 100vw;">
-<view class="history_card">
+
+<block wx:for="{{signHistory}}" wx:key="index"> 
+  <view class="history_card" >
 <view class="signin_box">
-<view>签到</view>
-<view>时间：2024-12-31 20:00:00</view>
-<view>地点：广东工业大学</view>
-<button class="sign_detail" bind:tap="signHistory">详情</button>
-<button wx:if="{{role==='ADMIN'}}" class="sign_update" data-status="1" bind:tap="signUpdate">修改</button>
+<view>{{'第'+item[0].signCount+'次'}}签到</view>
+<view>时间：{{item[0].signTime}}</view>
+<view>经度：{{item[0].longitude}},纬度：{{item[0].latitude}}</view>
+<button class="sign_detail" bind:tap="signHistory" data-detail="{{item[0]}}" >详情</button>
+<button wx:if="{{role==='ADMIN'}}" class="sign_update" data-status="1" data-detail="{{item[0]}}" bind:tap="signUpdate" >修改</button>
 </view>
-<view class="signout_box">
-  <view>签退</view>
-<view>时间：2024-12-31 20:00:00</view>
-<view>地点：广东工业大学</view>
-<button class="sign_detail" bind:tap="signHistory">详情</button>
-<button wx:if="{{role==='ADMIN'}}" class="sign_update" data-status="0" bind:tap="signUpdate">修改</button>
-</view>
-</view>
-<view class="history_card">
-<view class="signin_box">
-<view>签到</view>
-<view>时间：2024-12-31 20:00:00</view>
-<view>地点：广东工业大学</view>
-<button class="sign_detail" bind:tap="signHistory">详情</button>
-<button wx:if="{{role==='ADMIN'}}" class="sign_update" bind:tap="signUpdate">修改</button>
-</view>
-<view class="signout_box">
-  <view>签退</view>
-<view>时间：2024-12-31 20:00:00</view>
-<view>地点：广东工业大学</view>
-<button class="sign_detail" bind:tap="signHistory">详情</button>
-<button wx:if="{{role==='ADMIN'}}" class="sign_update" bind:tap="signUpdate">修改</button>
+<view wx:if="{{item.length===2}}" class="signout_box">
+  <view>{{'第'+item[1].signCount+'次'}}签退</view>
+<view>时间：{{item[1].signTime}}</view>
+<view>经度：{{item[1].longitude}},纬度：{{item[1].latitude}}</view>
+<button class="sign_detail" bind:tap="signHistory" data-detail="{{item[1]}}">详情</button>
+<button wx:if="{{role==='ADMIN'}}" class="sign_update" data-status="0" bind:tap="signUpdate" data-detail="{{item[1]}}">修改</button>
 </view>
 </view>
-<view class="history_card">
-<view class="signin_box">
-<view>签到</view>
-<view>时间：2024-12-31 20:00:00</view>
-<view>地点：广东工业大学</view>
-<button class="sign_detail" bind:tap="signHistory">详情</button>
-<button wx:if="{{role==='ADMIN'}}" class="sign_update" bind:tap="signUpdate">修改</button>
-</view>
-<view class="signout_box">
-  <view>签退</view>
-<view>时间：2024-12-31 20:00:00</view>
-<view>地点：广东工业大学</view>
-<button class="sign_detail" bind:tap="signHistory">详情</button>
-<button wx:if="{{role==='ADMIN'}}" class="sign_update" bind:tap="signUpdate">修改</button>
-</view>
-</view>
+</block>
 
 
 </view>
 <!-- 历史签到签退信息弹出框 -->
-<pop wx:if="{{signShow}}" signShow='{{signShow}}' bind:closeSign="onClose"></pop>
+<pop wx:if="{{signShow}}" signShow='{{signShow}}' signDetail="{{signDetail}}" bind:closeSign="onClose"></pop>

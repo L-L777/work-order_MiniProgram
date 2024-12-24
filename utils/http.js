@@ -1,7 +1,7 @@
 import axios from './axios.js';
 import handleErrors from "./handleError.js"
 const $http = new axios({
-  baseUrl: 'http://117.72.95.156:8082/api' // 设置请求根路径
+  baseUrl: 'http://117.72.95.156:6100/api' // 设置请求根路径
 });
 wx.$http = $http; // 将$http实例挂载到wx对象上，方便全局访问
 // 请求开始之前做一些事情
@@ -23,7 +23,8 @@ $http.afterRequest = async function(res, resolve, reject) {
   if (res.statusCode === 401 && !isRefreshing&&refreshCount<=Max_refresh) {
     console.log('endRequest', res);
     const config = res.config;
-    requestQueue.push(config);
+    console.log(resolve);
+    requestQueue.push({ config, resolve, reject });
     // console.log(requestQueue[0]);
     let refreshToken = wx.getStorageSync('refreshToken');
     console.log('refreshToken');
@@ -83,22 +84,25 @@ $http.afterRequest = async function(res, resolve, reject) {
   async function retryQueue() {
     while (requestQueue.length > 0) {
       // console.log(requestQueue[0]);
-      const queuedRequest = requestQueue.shift();
-      sendRequest(queuedRequest);
+      const { config, resolve, reject } = requestQueue.shift();
+      // console.log(config);
+      // console.log(resolve);
+      sendBeforeRequest(config, resolve, reject);
     }
   }
 
-  async function sendRequest(requestConfig) {
+  async function sendBeforeRequest(requestConfig,beforeResolve, beforeReject) {
+    // console.log(beforeResolve);
     Object.assign($http,requestConfig)
     // console.log($http);
-    $http._sendRequest()
+    $http._sendRequest(beforeResolve, beforeReject)
       .then((response) => {
         // console.log(response);
-        resolve(response.data);
+        // beforeResolve(response.data);
       })
       .catch((error) => {
         // console.log(error);
-        reject(error);
+        // beforeReject(error);
       });
   }
 };

@@ -26,6 +26,10 @@ Component({
       type:Object,
       value:{}
     },
+    signDetail:{
+      type:Object,
+      value:{}
+    },
     orderId:{
       type:Number,
       value:0
@@ -85,11 +89,9 @@ onStatusClose:function(){
 //  图片预览
 previewImg: function(e) {
   const currentUrl = e.currentTarget.dataset.src; // 获取当前点击的图片URL
-  const imgList = [];
-  imgList.push(currentUrl)
   wx.previewImage({
     current: currentUrl, // 当前显示图片的链接
-    urls:imgList,  //需要预览的图片链接列表
+    urls:this.data.signDetail.images,  //需要预览的图片链接列表
   });
 },
   // 密码非空校验
@@ -197,6 +199,7 @@ else{
     // 组件实例被挂载到页面节点树中时执行
     attached: function() {
       // console.log(this.data.orderId);
+      // console.log(this.data.signDetail.images);
     },
   }
 })

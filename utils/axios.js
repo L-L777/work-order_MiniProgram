@@ -61,13 +61,19 @@ class axios {
     return this._sendRequest();
   }
 
-  _sendRequest() {
+  _sendRequest(beforeResolve, beforeReject) {
+    // console.log( beforeResolve);
     // 请求之前做一些事
     if (this.beforeRequest && typeof this.beforeRequest === 'function') {
       this.beforeRequest(this);
     }
     // 发起请求
     return new Promise((resolve, reject) => {
+      // console.log(resolve);
+      if(typeof(beforeResolve)!=='function'){
+        beforeResolve=resolve
+        beforeReject=reject
+      }
       wx.request({
         url: this.url,
         method: this.method,
@@ -75,9 +81,10 @@ class axios {
         header: this.header,
         success: (res) => {
           // console.log(res);
+          // console.log( beforeResolve);
           if (res.statusCode === 200) {
-            resolve(res.data);
-          } else {
+            beforeResolve(res.data);
+          } else if(res.statusCode === 401){
             const config = {
               url: this.url,
               method: this.method,
@@ -85,7 +92,15 @@ class axios {
               header: this.header,
             };
             res.config = config;
-            reject(res);
+          }else {
+            const config = {
+              url: this.url,
+              method: this.method,
+              data: this.data,
+              header: this.header,
+            };
+            res.config = config;
+            beforeReject(res);
           }
         },
         fail: (err) => {
@@ -97,12 +112,12 @@ class axios {
             header: this.header,
           };
           err.config = config;
-          reject(err);
+          beforeReject(err);
         },
         complete: (res) => {
           // 请求完成以后做一些事情
           if (this.afterRequest && typeof this.afterRequest === 'function') {
-            this.afterRequest(res, resolve, reject);
+            this.afterRequest(res, beforeResolve, beforeReject);
           }
         }
       });

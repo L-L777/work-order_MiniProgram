@@ -33,7 +33,7 @@ Page({
 // 获取数据
 fetchOrders: async function() {
   this.setData({pageLoading:true})
-  const res = await ordersReq.getUnpublishOrders(this.data.page,this.data.pageSize);
+  const res = await ordersReq.getUnpublishOrders(this.data.page,this.data.pageSize,this.data.searchValue);
   if (res.code === 1) 
   {
     this.setData({ orderList: [...this.data.orderList, ...res.data.workOrderList],total:res.data.total,length:this.data.length+res.data.workOrderList.length});
@@ -50,8 +50,21 @@ fetchOrders: async function() {
   }
   this.setData({pageLoading:false, refresh:false,})
 },
+// 搜索
+onSearch(e) {  
+  // console.log(e.detail);  
+this.setData({page:1,hasMore: true,length:0,orderList: [],searchValue:e.detail},()=>{
+this.fetchOrders();
+})
+},
+// 取消搜索
+onSearchCancel() {    
+ this.setData({page:1,hasMore: true,length:0,orderList: [],searchValue:''},()=>{
+  this.fetchOrders();
+  })
+},
  // 滑动分页加载
- onReachBottom() {    
+ onLoadMore() {    
   if (this.data.hasMore) {
     this.setData({page:this.data.page+1 },() => {
       this.fetchOrders();
@@ -59,7 +72,7 @@ fetchOrders: async function() {
   }
 },
   // 下拉刷新事件处理函数
-  onPullDownRefresh() {
+  onRefresh() {
     this.setData({
       orderList: [], 
       pageLoading: true,

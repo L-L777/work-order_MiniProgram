@@ -43,20 +43,7 @@ page{
 }
 
 
-/* 工单盒子 */
-.orders_box{
-  width: 100vw;
-  margin-top: 110rpx;
-  display: flex;flex-direction: column;
-align-items: center;
 
-}
-
-/* 南网员工进入页面存储工单大盒子类名 */
-.worker{
-  width: 100vw;
-  margin-top: 210rpx;
-}
 
 /* 发布工单按钮 */
 .publish{

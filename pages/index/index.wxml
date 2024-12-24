@@ -5,6 +5,8 @@
   width="100vw"
   height="100%"
   lazy-load
+  show-loading
+  show-error
   src="https://web-test999.oss-cn-hangzhou.aliyuncs.com/login-background.png"
 />
 </view>

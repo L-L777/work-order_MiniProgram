@@ -22,9 +22,9 @@ register:(phone,password)=>{
 // 工单处理模块请求
 const ordersReq={
   // 获取工单列表(管理员/员工/施工方)
-  getOrders:(page=1,pageSize=10,status)=>{
+  getOrders:(page=1,pageSize=10,status,keyword)=>{
     const params={
-      status,page,pageSize
+      status,page,pageSize,keyword
     }
     return $http.get('/orders',params)
   },
@@ -36,9 +36,9 @@ const ordersReq={
     return $http.get('/orders/detail',params)
   },
   // 获取未发布工单(管理员/员工)
-  getUnpublishOrders:(page=1,pageSize=10)=>{
+  getUnpublishOrders:(page=1,pageSize=10,keyword)=>{
     const params={
-      page,pageSize
+      page,pageSize,keyword
     }
     return $http.get('/orders/publish',params)
   },
