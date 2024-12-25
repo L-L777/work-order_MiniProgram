@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "navBar":"../../components/navBar/navBar",
-    "pop":"../../components/pop/pop"
+    "pop":"../../components/pop/pop",
+    "van-loading": "@vant/weapp/loading/index"
   }
 }

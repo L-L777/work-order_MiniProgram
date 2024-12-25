@@ -14,6 +14,7 @@ Page({
     orderId:0,
     signHistory:[],
     signDetail:{},
+    loading:false,
     },
 
   onLoad(options){
@@ -38,7 +39,9 @@ Page({
     }
   },
   fetchHistory: async function(){
+    this.setData({loading:true})
 const res=await ordersReq.getSignDetail(this.data.orderId)
+this.setData({loading:false})
 if(res.code===1){
 this.setData({signHistory:[...res.data]})
 // console.log(res.data);
@@ -47,6 +50,7 @@ this.setData({signHistory:[...res.data]})
     title: res.msg,
     icon: 'none',
   });
+  
 }
   },
   // 关闭弹窗
