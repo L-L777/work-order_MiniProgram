@@ -44,7 +44,7 @@ style="padding-top:{{role === 'EMPLOYEE' || role === 'ADMIN' ? 210 : 110 }}rpx; 
   <!-- <ordersCard  btnshow='detail'> </ordersCard>
   <ordersCard  btnshow='detail'> </ordersCard>
   <ordersCard  btnshow='detail'> </ordersCard> -->
-  <view wx:if="{{pageLoading&&refresh}}" class="loading" >
+  <view wx:if="{{pageLoading||refresh}}" class="loading" >
     <van-loading type="spinner" color="#1989fa" />
   </view>
  </scroll-view>

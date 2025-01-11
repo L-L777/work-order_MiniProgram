@@ -85,9 +85,9 @@ const ordersReq={
     return $http.post('/orders/sign',data)
   },
   // 查看工单签到签退信息（管理员/员工/施工方）
-  getSignDetail:(orderId)=>{
+  getSignDetail:(orderId,page=1,pageSize=10)=>{
     const params={
-      orderId
+      orderId,page,pageSize
     }
     return $http.get('/orders/sign',params)
   },

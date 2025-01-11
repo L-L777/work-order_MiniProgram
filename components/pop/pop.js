@@ -22,6 +22,9 @@ Component({
     passwordShow:{
       type:Boolean
     },
+    selectShow:{
+      type:Boolean
+    },
     detailMessage:{
       type:Object,
       value:{}
@@ -33,7 +36,11 @@ Component({
     orderId:{
       type:Number,
       value:0
-    }
+    },
+    selectOrderList:{
+      type:Array,
+      value:[]
+    },
   },
 
   /**
@@ -85,6 +92,11 @@ onStatusClose:function(){
  onPasswordClose:function(){
   // 调用自定义方法，发送数据到父组件
   this.triggerEvent('closePassword', { data: '关闭弹窗' });
+ },
+ // 关闭已选择工单弹窗
+ onSelectClose:function(){
+  // 调用自定义方法，发送数据到父组件
+  this.triggerEvent('closeSelect', { data: '关闭弹窗' });
  },
 //  图片预览
 previewImg: function(e) {
@@ -198,7 +210,7 @@ else{
   lifetimes: {
     // 组件实例被挂载到页面节点树中时执行
     attached: function() {
-      // console.log(this.data.orderId);
+      // console.log(this.data.selectOrderList);
       // console.log(this.data.signDetail.images);
     },
   }

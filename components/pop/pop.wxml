@@ -199,3 +199,30 @@
     </form>
   </view>
 </van-popup>
+
+<!-- 已选择工单弹窗 -->
+<van-popup
+  show="{{ selectShow }}"
+  round
+  closeable
+  position="bottom"
+  custom-style="height: 70%"
+  z-index='1000'
+  bind:close="onSelectClose"
+  lock-scroll
+  root-portal
+>
+  <view class="select_order_box">
+    <view class="table_title">
+    {{selectOrderList.length===0?"暂无选择工单":" 已选择工单列表"}}
+
+  </view>
+  <block wx:for="{{selectOrderList}}" wx:key="index">
+  <view class="order_num">
+  工单号：{{item.orderNumber}}
+  </view>
+  </block>
+  </view>
+  <view class="table_cue">注：若选择工单较多，列表可以滑动查看</view>
+  <button  class="createfile_btn">生成附件</button>
+</van-popup>

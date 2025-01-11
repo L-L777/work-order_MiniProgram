@@ -94,3 +94,45 @@ border-bottom: 1px solid #EEEEEE;
     justify-content: center;align-items: center;
     border-radius: 30px;
   }
+
+  /* 已选择工单弹窗 */
+ .select_order_box{
+  padding: 50rpx;
+  margin: 50rpx;
+  margin-bottom: 20rpx;
+max-height: 75%;
+/* background-color: pink; */
+border-radius: 50px;
+border: 1px solid #EEEEEE;
+overflow: auto;
+ } 
+ .select_order_box::-webkit-scrollbar{
+   display: none;
+ }
+.order_num{
+margin-top: 20rpx;
+color: #AAAAAA;
+border-bottom: 1px solid #DDDDDD;
+ }
+ .table_title{
+   display: flex;
+   justify-content: center;
+   color: #777777;
+ }
+ .table_cue{
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   color: #DDDDDD;
+   font-size: 12px;
+ }
+ .createfile_btn{
+   width: 300rpx;
+   height: 100rpx;
+   margin-top: 20rpx;
+   display: flex;
+   justify-content: center;align-items: center;
+   border-radius: 50px;
+   color: #fff;
+   background: linear-gradient(135deg, #0000FF,#00CCFF ); 
+ }

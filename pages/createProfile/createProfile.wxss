@@ -1,0 +1,27 @@
+/* pages/createProfile/createProfile.wxss */
+.select_btnbox{
+  position: fixed;
+  bottom: 10%;
+  right: 0%;
+  width: 180rpx;
+  height: 80rpx;
+}
+.select_btn{
+  border-radius: 30px;
+  font-size: 14px;
+  background: linear-gradient(135deg, #6699FF, #c3dbf2); /* 渐变色背景 */
+  color: #fff;
+}
+.sum{
+  font-size: 8px;
+  background-color: #9999FF;
+  width: 30rpx;
+  height: 30rpx;
+  border-radius: 30rpx;
+  color: #fff;
+  display: flex;
+  justify-content: center;align-items: center;
+position: absolute;
+z-index: 10;
+top: -10%;
+}

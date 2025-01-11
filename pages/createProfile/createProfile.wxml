@@ -1,0 +1,47 @@
+<!--pages/createProfile/createProfile.wxml-->
+<navBar name="{{title}}" leftStatus='true'></navBar>
+<view style="padding-top:{{navBarHeight}}rpx; width: 100vw;">
+<!-- 搜索框 -->
+<view  style=" width: 100vw; height: 100rpx; background-color: white; z-index: 5000;" >
+  <van-search
+value="{{ searchValue }}"
+placeholder="请输入搜索关键词"
+show-action
+bind:search="onSearch"
+bind:cancel="onSearchCancel"
+/>
+</view>
+<!-- 选择工单 -->
+<view style="height: calc(100vh - {{navBarHeight+110}}rpx); width: 100vw; padding-bottom: 20rpx;">
+<scroll-view enableFlex
+ enablePullDownRefresh
+ refresher-enabled
+ refresher-triggered="{{refresh}}"
+    bind:refresherrefresh="onRefresh"
+    style="width: 100%; height: 100%;  display: flex; flex-direction: column; align-items: center;"
+    refresher-default-style="none"
+  refresher-default-icon="none"
+  refresher-triggered-icon="none"
+    scroll-y
+    paging-enabled
+    bind:scrolltolower="onLoadMore">
+    <block  wx:for="{{orderList}}" wx:key="id">
+    <ordersCard order="{{item}}" btnshow='select' bind:selectOrder="selectOrder"></ordersCard>
+  </block>
+  <view wx:if="{{loading||refresh}}" style="margin-top: 20rpx;" >
+    <van-loading type="spinner" color="#1989fa" />
+  </view>
+</scroll-view>
+
+</view>
+
+<!-- 查看已选择工单按钮 -->
+<view class="select_btnbox">
+<view wx:if="{{sum!==0}}" class="sum">{{sum}}</view>
+  <button class="select_btn" bind:tap="checkSelect">已选择</button>
+</view>
+
+
+</view>
+<!-- 已选择工单弹窗 -->
+<pop wx:if="{{selectShow}}" selectShow='{{selectShow}}' selectOrderList='{{selectOrderList}}' bind:closeSelect="onClose"></pop>

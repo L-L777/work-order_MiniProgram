@@ -19,6 +19,7 @@ Component({
    */
   data: {
 show:false,
+selectStatus:false,
   },
 
   /**
@@ -38,6 +39,11 @@ show:false,
 wx.navigateTo({
   url: '/pages/orderDetail/orderDetail?id='+this.data.order.id,
 })
+    },
+    // 选择工单
+    selectOrders:function(){
+      this.triggerEvent('selectOrder', { status: this.data.selectStatus, order:this.data.order});
+      this.setData({selectStatus:!this.data.selectStatus})
     },
   },
   lifetimes: {

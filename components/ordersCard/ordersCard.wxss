@@ -22,7 +22,7 @@
   margin-bottom: 10rpx;
   margin-left: 20rpx;
 }
-.detail_btn,.add_btn{
+.detail_btn,.add_btn,.select_btn{
   position: absolute;
   bottom: 10%;
   right: 5%;
@@ -35,6 +35,9 @@
   border-radius: 20rpx;
   background-color: #0033FF;
   color: #fff;
+}
+.select_active{
+  background-color: #9999FF;
 }
 .status_sign{
   position: absolute;

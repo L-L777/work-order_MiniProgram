@@ -38,6 +38,11 @@ word-wrap: break-word; /* 允许在单词内换行 */
 
 
 /* 按钮 */
+.worker_btnbox,.conductor_btnbox,.check_file_btnbox,.create_file_btnbox,.update_btnbox{
+  display: flex;
+  justify-content: space-evenly;
+  width: 90%;
+}
 .detail_page_btn{
   margin-top: 50rpx;
   border-radius: 30px;
@@ -49,14 +54,22 @@ word-wrap: break-word; /* 允许在单词内换行 */
   font-weight: 700;
   color: #fff;
 }
-.file_btn{
+.check_file_btn{
   width: 40%;
    background: linear-gradient(135deg, #00CCFF, #33FFFF); /* 渐变色背景 */
 }
+.create_file_btn{
+  width: 40%;
+   background: linear-gradient(135deg, #6699FF, #33FFFF); /* 渐变色背景 */
+}
 .update_btn{
+  width: 40%;
+  font-size: 14px;
     background-color: #6633CC;
     }
 .update_status_btn{
+  width: 40%;
+  font-size: 14px;
   background: linear-gradient(135deg, #FF00CC, #CC33FF);
 }
 .status_btn{
@@ -69,11 +82,7 @@ word-wrap: break-word; /* 允许在单词内换行 */
 .history_btn{
   background-color: #3366FF;
 }
-.worker_btnbox,.conductor_btnbox,.file_btnbox{
-  display: flex;
-  justify-content: space-evenly;
-  width: 90%;
-}
+
 .agree_btn{
 width: 40%;
 background-color: #33CCFF;

@@ -61,7 +61,7 @@ Page({
   // 查看附件按钮
   fileCheck: function(event) {
     // 获取 data-src 属性的值
-    var fileSrc = event.currentTarget.dataset.src;
+    let fileSrc = event.currentTarget.dataset.src;
     this.previewFile(fileSrc);
   },
   // 预览文件
@@ -83,6 +83,13 @@ Page({
         })
         
       }
+    })
+  },
+  // 生成附件按钮
+  fileCreate:function(e){
+    let fileName = e.currentTarget.dataset.filename;
+    wx.navigateTo({
+      url: `/pages/createProfile/createProfile?fileName=${fileName}`,
     })
   },
 // 关闭弹窗

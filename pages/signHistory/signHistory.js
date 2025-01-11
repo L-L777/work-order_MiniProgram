@@ -15,6 +15,11 @@ Page({
     signHistory:[],
     signDetail:{},
     loading:false,
+    page: 1, // 当前页码
+    pageSize:5,//一页多少条
+    total:0,//总数据条数
+    hasMore: true, // 是否还有更多数据
+    refresh:false,//下拉刷新状态
     },
 
   onLoad(options){
@@ -40,11 +45,16 @@ Page({
   },
   fetchHistory: async function(){
     this.setData({loading:true})
-const res=await ordersReq.getSignDetail(this.data.orderId)
+const res=await ordersReq.getSignDetail(this.data.orderId,this.data.page,this.data.pageSize)
 this.setData({loading:false})
 if(res.code===1){
-this.setData({signHistory:[...res.data]})
+this.setData({signHistory:[...this.data.signHistory,...res.data.workOrderList],total:res.data.total})
 // console.log(res.data);
+if(res.data.total>this.data.page*this.data.pageSize){
+  this.setData({hasMore:true});
+}else{
+  this.setData({hasMore:false});
+}
 }else{
   wx.showToast({
     title: res.msg,
@@ -53,6 +63,32 @@ this.setData({signHistory:[...res.data]})
   
 }
   },
+
+ // 滑动分页加载
+ onLoadMore() {    
+  // console.log(111);
+  if (this.data.hasMore) {
+    this.setData({page:this.data.page+1 },() => {
+      this.fetchHistory();
+    });
+  }
+},
+  // 下拉刷新事件处理函数
+  onRefresh() {
+    this.setData({
+      signHistory:[],
+    signDetail:{},
+      loading: true,
+      refresh:true ,
+      page:1
+    },()=>{
+       // 调用获取数据的函数，这里假设是fetchOrders
+    this.fetchHistory();
+    // 结束下拉刷新
+    wx.stopPullDownRefresh();
+    });
+  },
+
   // 关闭弹窗
   onClose:function(){
     this.setData({ signShow:false });

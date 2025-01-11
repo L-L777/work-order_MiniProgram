@@ -7,7 +7,8 @@
     "pages/orderDetail/orderDetail",
     "pages/checkOrder/checkOrder",
     "pages/signHistory/signHistory",
-    "pages/sign/sign"
+    "pages/sign/sign",
+    "pages/createProfile/createProfile"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -31,15 +32,14 @@
       }
     ]
   },
-
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents",
   "permission": {
     "scope.userLocation": {
-      "desc": "你的位置信息将用于小程序位置接口的效果展示" 
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
   },
   "requiredPrivateInfos": [
     "getLocation"
-]
+  ]
 }

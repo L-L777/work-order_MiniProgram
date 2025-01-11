@@ -1,26 +1,52 @@
 <!--pages/signHistory/signHistory.wxml-->
 <navBar name="历史签到签退记录" leftStatus='true'></navBar>
 <view class="history_page" style="padding-top:{{navBarHeight}}rpx;  position: relative; width: 100vw;">
- <van-loading wx:if="{{loading}}" type="spinner" color="#1989fa" />
-  <view wx:if="{{signHistory.length===0&&!loading}}" class="empty_sign">暂无签到签退数据</view>
+
+
+  <view style="height: calc(100vh - {{navBarHeight}}rpx); width: 100vw; padding-bottom: 20rpx;">
+<scroll-view
+enableFlex
+ enablePullDownRefresh
+ refresher-enabled
+ refresher-triggered="{{refresh}}"
+    bind:refresherrefresh="onRefresh"
+    style="width: 100%; height: 100%;  display: flex; flex-direction: column; align-items: center;"
+    refresher-default-style="none"
+  refresher-default-icon="none"
+  refresher-triggered-icon="none"
+    scroll-y
+    paging-enabled
+    bind:scrolltolower="onLoadMore"
+>
+
+<!-- 签到签退数据展示 -->
 <block wx:for="{{signHistory}}" wx:key="index"> 
   <view class="history_card" >
 <view class="signin_box">
 <view>{{'第'+item[0].signCount+'次'}}签到</view>
 <view>时间：{{item[0].signTime}}</view>
-<view>经度：{{item[0].longitude}},纬度：{{item[0].latitude}}</view>
+<view>经度：{{item[0].longitude}}</view>
+<view>纬度：{{item[0].latitude}}</view>
 <button class="sign_detail" bind:tap="signHistory" data-detail="{{item[0]}}" >详情</button>
 <button wx:if="{{role==='ADMIN'}}" class="sign_update" data-status="1" data-detail="{{item[0]}}" bind:tap="signUpdate" >修改</button>
 </view>
 <view wx:if="{{item.length===2}}" class="signout_box">
   <view>{{'第'+item[1].signCount+'次'}}签退</view>
 <view>时间：{{item[1].signTime}}</view>
-<view>经度：{{item[1].longitude}},纬度：{{item[1].latitude}}</view>
+<view>经度：{{item[1].longitude}}</view>
+<view>纬度：{{item[1].latitude}}</view>
 <button class="sign_detail" bind:tap="signHistory" data-detail="{{item[1]}}">详情</button>
 <button wx:if="{{role==='ADMIN'}}" class="sign_update" data-status="0" bind:tap="signUpdate" data-detail="{{item[1]}}">修改</button>
 </view>
 </view>
 </block>
+<van-loading wx:if="{{loading}}" style="margin-top: 20rpx;" type="spinner" color="#1989fa" />
+<!-- 暂无签到签退数据 -->
+  <view wx:if="{{signHistory.length===0&&!loading}}" class="empty_sign">暂无签到签退数据</view>
+</scroll-view>
+
+  </view>
+
 
 
 </view>
