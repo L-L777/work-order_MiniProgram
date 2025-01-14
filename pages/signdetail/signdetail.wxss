@@ -39,6 +39,7 @@
 }
 .sign_img_box{
   margin-top: 50rpx;
+  margin-bottom: 20rpx;
   width: 100%;
  
   display: flex;
