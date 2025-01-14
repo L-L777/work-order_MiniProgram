@@ -53,7 +53,7 @@
 <button class="detail_page_btn finish_btn" bind:tap="finish" >结束工程</button>
 </view>
 <!-- 三方都有的按钮 -->
-<button class="detail_page_btn status_btn " bind:tap="confirm">施工状态：{{detailMessage.status}}</button>
+<button class="detail_page_btn status_btn " bind:tap="confirm">{{detailMessage.status==="施工方未确认"?"确认工单":"施工状态："+detailMessage.status}}</button>
 <!-- <button class="detail_page_btn check_btn" bind:tap="detailOrder">查看工单信息</button> -->
 <button class="detail_page_btn history_btn" bind:tap="signHistory">施工方历史签到签退记录</button>
 

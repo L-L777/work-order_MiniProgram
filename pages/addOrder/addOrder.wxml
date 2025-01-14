@@ -1,5 +1,5 @@
 <!--pages/addOrder/addOrder.wxml-->
-<navBar name="新建工单列表" leftStatus='true'></navBar>
+<navBar name="发布工单列表" leftStatus='true'></navBar>
 
 <view  style="position: fixed;top:{{navBarHeight}}rpx;  width: 100vw; height: 100rpx; background-color: white; z-index: 100;">
   <van-search

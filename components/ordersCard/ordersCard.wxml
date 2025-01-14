@@ -13,7 +13,7 @@
 <text>{{order.customerAddress}}</text>
 </view>
 <button wx:if="{{btnshow==='detail'&&order.permission==='1'}}" class="detail_btn" bindtap='toDetail'>详情</button>
-<button wx:if="{{btnshow==='add'}}" class="add_btn" bindtap='createOrders'>新建</button>
+<button wx:if="{{btnshow==='add'}}" class="add_btn" bindtap='createOrders'>发布</button>
 <button wx:if="{{btnshow==='select'}}" class="select_btn {{selectStatus? 'select_active' : ''}}" bindtap='selectOrders'>{{selectStatus?'取消':'选择'}}</button>
 <view wx:if="{{order.status==='施工方未确认'}}" class="status_sign unconfirm">未确认</view>
 <view wx:if="{{order.status==='施工中'}}" class="status_sign appending">施工中</view>
