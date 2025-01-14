@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "navBar":"../../components/navBar/navBar",
+    "van-loading": "@vant/weapp/loading/index",
+    "van-image": "@vant/weapp/image/index"
+  }
+}

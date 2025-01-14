@@ -8,7 +8,8 @@
     "pages/checkOrder/checkOrder",
     "pages/signHistory/signHistory",
     "pages/sign/sign",
-    "pages/createProfile/createProfile"
+    "pages/createProfile/createProfile",
+    "pages/signdetail/signdetail"
   ],
   "window": {
     "navigationBarTextStyle": "black",

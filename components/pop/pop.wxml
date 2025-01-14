@@ -123,7 +123,7 @@
   round
   closeable
   position="bottom"
-  custom-style="height: 70%"
+  custom-style="height: 75%"
   z-index='1000'
   bind:close="onSignClose"
   lock-scroll 
@@ -155,8 +155,11 @@
   loading-class="sign_img_loading"
 />
   </block>
-    
   
+  <view class="map-container">
+    <label>位置地图：</label>  
+  <map class="myMap" latitude="{{signDetail.latitude}}" longitude="{{signDetail.longitude}}" scale="{{scale}}" markers="{{markers}}" bindmarkertap="markerTap" show-location enable-3D></map>
+</view>
   </view>
 </view>
 </van-popup>

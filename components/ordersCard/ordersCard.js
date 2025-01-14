@@ -1,4 +1,5 @@
 // components/ordersCard/ordersCard.js
+import { ordersReq } from "../../utils/api.js";
 Component({
 
   /**
@@ -27,8 +28,25 @@ selectStatus:false,
    */
   methods: {
     // 点击新建按钮
-    createOrders: function() {
-      this.setData({ show: true });
+    createOrders: async function() {
+      // this.setData({ show: true });
+    const res = await ordersReq.publishOrders(this.data.order.id)
+    if(res.code===1){
+      
+      wx.setStorageSync('needHomeRefreshOnReturn', true)
+      wx.navigateBack(
+      {  delta: 1 }
+      )
+      wx.showToast({
+        title: res.msg,
+        icon:'success',
+      })
+    }else{
+      wx.showToast({
+        title: '新建失败',
+        icon:'none'
+      })
+    }
     },
     // 关闭弹出框
     onClose:function(){

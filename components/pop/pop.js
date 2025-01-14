@@ -57,6 +57,15 @@ Component({
 //  修改施工状态选择器
 columns:["施工方未确认","施工方确认未施工","施工中","验收未通过","验收通过"],
 statusValue:'施工方未确认',
+// 地图配置
+markers: [{
+  id: 1,
+  latitude: 0,
+  longitude: 0,
+  title: '施工地点',
+  width: 20, // 标记的宽度
+  height: 20 // 标记的高度
+}]
   },
 
   /**
@@ -212,6 +221,12 @@ else{
     attached: function() {
       // console.log(this.data.selectOrderList);
       // console.log(this.data.signDetail.images);
+      if(this.data.signShow){
+        this.setData({markers:[...this.data.markers, {
+          longitude: this.data.signDetail.longitude,
+          latitude: this.data.signDetail.latitude
+        }]})
+      }
     },
   }
 })

@@ -76,7 +76,15 @@ border-bottom: 1px solid #EEEEEE;
     100% { transform: rotate(360deg); }
   }
 
-
+  .map-container{
+    width: 100%;
+    margin-top: 20rpx;
+  }
+  .myMap{
+    width: 100% ;
+    height: 300rpx;
+    margin-top: 10rpx;
+  }
 
   /* 修改密码弹窗 */
   .update_password_box{

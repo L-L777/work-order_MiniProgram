@@ -96,7 +96,11 @@ if(res.data.total>this.data.page*this.data.pageSize){
   // 详情按钮
   signHistory:function(e){
     // console.log(e.currentTarget.dataset);
-    this.setData({ signShow: true,signDetail:e.currentTarget.dataset.detail });
+    const detail=JSON.stringify(e.currentTarget.dataset.detail)
+    wx.navigateTo({
+      url: `/pages/signdetail/signdetail?signDetail=${detail}`,
+    })
+    // this.setData({ signShow: true,signDetail:e.currentTarget.dataset.detail });
   },
   // 修改按钮
   signUpdate:function(e){

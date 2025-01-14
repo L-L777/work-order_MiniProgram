@@ -1,0 +1,38 @@
+<!--pages/signdetail/signdetail.wxml-->
+<navBar name="{{title}}" leftStatus='true'></navBar>
+<view style="padding-top:{{navBarHeight}}rpx;">
+<!-- 位置地图 -->
+<view class="map-container">
+ <map class="myMap" latitude="{{signDetail.latitude}}" longitude="{{signDetail.longitude}}" scale="{{scale}}" markers="{{markers}}" bindmarkertap="markerTap" show-location enable-3D></map>
+</view>
+<!-- 签到签退详情 -->
+<view class="signdetail_box">
+<view class="sign_title">
+  {{'第'+signDetail.signCount+'次'}}{{signDetail.signType==='1'?'签到:':'签退:'}}
+  </view>
+  <view class="sign_msg">签到时间：<text>{{signDetail.signTime}}</text></view>
+  <view wx:if="{{signDetail.updateTime}}" class="sign_msg">详情更新时间：<text>{{signDetail.updateTime}}</text></view>
+  <view class="sign_msg">经度：<text>{{signDetail.longitude}}</text></view>
+  <view class="sign_msg">纬度：<text>{{signDetail.latitude}}</text></view>
+  <view class="sign_description">
+  <label>描述：</label><view class="description_content">{{signDetail.textInfo}}</view>
+  </view>
+  <view class="sign_img_box" >
+  <block wx:for="{{signDetail.images}}" wx:key="index">
+    <van-image
+  width="180rpx"
+  height="180rpx"
+  lazy-load
+  show-loading
+  show-error
+  radius='5px'
+  custom-class="sign_img"
+  bind:click="previewImg"
+  data-src="{{item}}"
+  src="{{item}}"
+  loading-class="sign_img_loading"
+/>
+  </block>
+</view>
+</view>
+</view>
